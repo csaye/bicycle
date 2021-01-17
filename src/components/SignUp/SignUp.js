@@ -6,8 +6,8 @@ function uid() {
   return firebase.auth().currentUser?.uid;
 }
 
-// ChooseUsername component
-function ChooseUsername() {
+// SignUp component
+function SignUp() {
   let [username, setUsername] = useState('');
 
   const usersRef = firebase.firestore().collection('users');
@@ -33,7 +33,7 @@ function ChooseUsername() {
   }
 
   return (
-    <div className="ChooseUsername">
+    <div className="SignUp">
       <form onSubmit={chooseUsername}>
         {/* Username */}
         <label htmlFor="usernameInput">Username</label>
@@ -46,10 +46,10 @@ function ChooseUsername() {
         required
         />
         {/* Button */}
-        <button type="submit">Choose Username</button>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );
 }
 
-export default ChooseUsername;
+export default SignUp;

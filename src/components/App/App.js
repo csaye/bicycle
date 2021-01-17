@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import Navbar from '../Navbar/Navbar.js';
 import SignIn from '../SignIn/SignIn.js';
-// import ChooseUsername from '../SignIn/ChooseUsername.js';
+import SignUp from '../SignUp/SignUp.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -19,34 +21,37 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <Navbar />
-        {/* Show SignOut if user signed in*/}
-        { firebase.auth().currentUser && <SignOut /> }
-      </header>
-      <section>
-        {/* Show Homescreen if user signed in and SignIn otherwise */}
-        { firebase.auth().currentUser ? <Homescreen /> : <SignIn /> }
-      </section>
+      <Router>
+        <header>
+          <Navbar />
+          {/* Show SignOut if user signed in*/}
+          { firebase.auth().currentUser && <SignOut /> }
+        </header>
+        <section>
+          {/* Show Homescreen if user signed in and SignIn otherwise */}
+          {/*firebase.auth().currentUser ? <Homescreen /> : <SignIn />*/}
+          <Homescreen />
+        </section>
+      </Router>
     </div>
   );
 }
 
 // Homescreen component
 function Homescreen() {
-  // console.log(auth.currentUser);
   return (
     <div className="Homescreen">
-      <p>Homescreen</p>
-    </div>
-  );
-}
-
-// Navbar component
-function Navbar() {
-  return (
-    <div className="Navbar">
-      <p>Navbar</p>
+      <Switch>
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/">
+          <p>Bicycle Home</p>
+        </Route>
+      </Switch>
     </div>
   );
 }
