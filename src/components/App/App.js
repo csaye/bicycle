@@ -24,12 +24,8 @@ function App() {
       <Router>
         <header>
           <Navbar />
-          {/* Show SignOut if user signed in*/}
-          { firebase.auth().currentUser && <SignOut /> }
         </header>
         <section>
-          {/* Show Homescreen if user signed in and SignIn otherwise */}
-          {/*firebase.auth().currentUser ? <Homescreen /> : <SignIn />*/}
           <Homescreen />
         </section>
       </Router>
@@ -49,19 +45,9 @@ function Homescreen() {
           <SignUp />
         </Route>
         <Route path="/">
-          <p>Bicycle Home</p>
+          <p>Home</p>
         </Route>
       </Switch>
-    </div>
-  );
-}
-
-// SignOut component
-function SignOut() {
-  return (
-    <div className="SignOut">
-      <p>Signed in as {firebase.auth().currentUser.displayName}</p>
-      <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
     </div>
   );
 }

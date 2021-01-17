@@ -1,3 +1,11 @@
 .Navbar {
+  height: 60px;
   background-color: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Navbar p, .Navbar .link, .Navbar button {
+  margin: 0 20px;
 }
