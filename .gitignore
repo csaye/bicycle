@@ -9,9 +9,6 @@
 # production
 /build
 
-# private
-/src/private
-
 # logs
 npm-debug.log*
 yarn-debug.log*
