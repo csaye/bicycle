@@ -1,13 +1,23 @@
+// import React, { useState } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 
+// function uid() {
+//   return firebase.auth().currentUser?.uid;
+// }
+
 // Navbar component
 function Navbar() {
-  async function username() {
-    const uid = await firebase.auth().currentUser.uid;
-    return await firebase.collections('users').doc(uid).get().data().username;
-  }
+  // let [username, setUsername] = useState('');
+  //
+  // async function getUsername() {
+  //   let userData = await firebase.firestore()
+  //   .collection('users')
+  //   .doc(uid()).get();
+  //   setUsername(userData.data().username);
+  // }
+  // getUsername();
 
   return (
     <div className="Navbar">
@@ -24,7 +34,7 @@ function Navbar() {
       }
       {
         firebase.auth().currentUser &&
-        <p>Signed in as {username()}</p>
+        <p>Signed in as {firebase.auth().currentUser.displayName}</p>
       }
       {
         firebase.auth().currentUser &&
