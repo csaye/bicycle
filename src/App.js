@@ -1,39 +1,36 @@
 import React, { useState } from 'react';
 import './App.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
-// import 'firebase/firestore';
+import 'firebase/firestore';
 import { firebaseConfig } from './private/firebaseConfig.js';
 
 // initialize firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-// const firestore = firebase.firestore();
+const firestore = firebase.firestore();
+
+function uid() {
+  return auth.currentUser?.uid;
+}
 
 // App component
 function App() {
   useAuthState(auth);
 
-  function username() {
-    // get current user username
-    return false;
-  }
-
   return (
     <div className="App">
       <header>
         <Navbar />
+        {/* Show SignOut if user signed in*/}
         { auth.currentUser && <SignOut /> }
       </header>
       <section>
-        {/* User not signed in */}
-        { !auth.currentUser && <SignIn /> }
-        {/* User signed in without username */}
-        { auth.currentUser && !username() && <ChooseUsername /> }
-        {/* User signed in with username */}
-        { auth.currentUser && username() && <Homescreen /> }
+        {/* Show Homescreen if user signed in and SignIn otherwise */}
+        { auth.currentUser ? <Homescreen /> : <SignIn /> }
       </section>
     </div>
   );
@@ -41,7 +38,7 @@ function App() {
 
 // Homescreen component
 function Homescreen() {
-  console.log(auth.currentUser);
+  // console.log(auth.currentUser);
 
   return (
     <div className="Homescreen">
@@ -63,9 +60,26 @@ function Navbar() {
 function ChooseUsername() {
   let [username, setUsername] = useState('');
 
+  const usersRef = firestore.collection('users');
+  const [users] = useCollectionData(usersRef);
+
+  // returns whether username is taken
+  function usernameTaken() {
+    return users.some((user) => user.username === username);
+  }
+
+  // attempts to assign username to user
   async function chooseUsername(e) {
     e.preventDefault();
-    // set username
+    // if username taken
+    if (usernameTaken()) {
+      alert("That username is taken. Please try another.");
+    // if username available
+    } else {
+      await firestore.collection('users').doc(uid()).set({
+        username: username
+      });
+    }
   }
 
   return (
