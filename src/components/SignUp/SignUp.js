@@ -35,7 +35,6 @@ function SignUp() {
       alert(e.message);
       return;
     };
-
     // set display name
     await firebase.auth().currentUser.updateProfile({
       displayName: displayName
@@ -45,6 +44,8 @@ function SignUp() {
     await firebase.firestore().collection('users').doc(uid).set({
       username: username
     });
+    // go to home page
+    window.location.href = '/';
   }
 
   return (

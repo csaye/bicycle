@@ -10,8 +10,8 @@ function SignIn() {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-    } catch {
-      alert('Incorrect email or password.');
+    } catch(e) {
+      alert(e);
     }
   }
 
