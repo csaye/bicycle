@@ -14,16 +14,26 @@ const auth = firebase.auth();
 
 // App component
 function App() {
-  const [user] = useAuthState(auth);
+  useAuthState(auth);
+
+  function username() {
+    // get current user username
+    return false;
+  }
 
   return (
     <div className="App">
       <header>
-        <h1>Bicycle</h1>
+        <Navbar />
         { auth.currentUser && <SignOut /> }
       </header>
       <section>
-        { user ? <Homescreen /> : <SignIn /> }
+        {/* User not signed in */}
+        { !auth.currentUser && <SignIn /> }
+        {/* User signed in without username */}
+        { auth.currentUser && !username() && <ChooseUsername /> }
+        {/* User signed in with username */}
+        { auth.currentUser && username() && <Homescreen /> }
       </section>
     </div>
   );
@@ -31,9 +41,49 @@ function App() {
 
 // Homescreen component
 function Homescreen() {
+  console.log(auth.currentUser);
+
   return (
     <div className="Homescreen">
       <p>Homescreen</p>
+    </div>
+  );
+}
+
+// Navbar component
+function Navbar() {
+  return (
+    <div className="Navbar">
+      <p>Navbar</p>
+    </div>
+  );
+}
+
+// ChooseUsername component
+function ChooseUsername() {
+  let [username, setUsername] = useState('');
+
+  async function chooseUsername(e) {
+    e.preventDefault();
+    // set username
+  }
+
+  return (
+    <div className="ChooseUsername">
+      <form onSubmit={chooseUsername}>
+        {/* Username */}
+        <label htmlFor="usernameInput">Username</label>
+        <input
+        value={username}
+        type="text"
+        id="usernameInput"
+        onChange={e => setUsername(e.target.value)}
+        pattern="[A-Za-z0-9_]{3,16}"
+        required
+        />
+        {/* Button */}
+        <button type="submit">Choose Username</button>
+      </form>
     </div>
   );
 }
@@ -43,11 +93,8 @@ function SignIn() {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
 
-  function onKeyPress(event) {
-    if (event.key === 'Enter') signIn();
-  }
-
-  async function signIn() {
+  async function signIn(e) {
+    e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
     } catch {
@@ -57,24 +104,28 @@ function SignIn() {
 
   return (
     <div className="SignIn">
-      {/* Email */}
-      <label htmlFor="emailInput">Email</label>
-      <input
-      value={email}
-      type="email"
-      onChange={e => setEmail(e.target.value)}
-      onKeyPress={onKeyPress}
-      />
-      {/* Password */}
-      <label htmlFor="passwordInput">Password</label>
-      <input
-      value={password}
-      type="password"
-      onChange={e => setPassword(e.target.value)}
-      onKeyPress={onKeyPress}
-      />
-      {/* Button */}
-      <button onClick={signIn}>Sign In</button>
+      <form onSubmit={signIn}>
+        {/* Email */}
+        <label htmlFor="emailInput">Email</label>
+        <input
+        value={email}
+        type="email"
+        id="emailInput"
+        onChange={e => setEmail(e.target.value)}
+        required
+        />
+        {/* Password */}
+        <label htmlFor="passwordInput">Password</label>
+        <input
+        value={password}
+        type="password"
+        id="passwordInput"
+        onChange={e => setPassword(e.target.value)}
+        required
+        />
+        {/* Button */}
+        <button type="submit">Sign In</button>
+      </form>
     </div>
   );
 }
