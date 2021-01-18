@@ -1,11 +1,23 @@
 .Navbar {
-  height: 60px;
   background-color: #efefef;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  min-height: 75px;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
 }
 
-.Navbar p, .Navbar .link, .Navbar button {
-  margin: 0 20px;
+.navbar-brand img {
+  height: 50px;
+}
+
+.navbar-nav li a, .navbar-nav li button, .navbar-nav li input, .navbar-nav li p {
+    float: right;
+}
+
+.Navbar button {
+  margin: 5px 0;
+}
+
+.Navbar p, .Navbar .link, .Navbar button, .Navbar input {
+  margin: 10px 20px;
 }
