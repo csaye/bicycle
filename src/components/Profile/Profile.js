@@ -70,11 +70,10 @@ function Profile() {
         firebase.auth().currentUser?.uid === uid &&
         <form onSubmit={makePost}>
           {/* Content */}
-          <label htmlFor="contentInput">Content</label>
           <input
           value={content}
           type="text"
-          id="contentInput"
+          placeholder="content"
           onChange={e => setContent(e.target.value)}
           required
           />

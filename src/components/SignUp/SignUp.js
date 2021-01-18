@@ -1,4 +1,3 @@
-import './SignUp.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
@@ -11,6 +10,8 @@ function SignUp() {
   let [password, setPassword] = useState('');
   let [displayName, setDisplayName] = useState('');
   let [username, setUsername] = useState('');
+
+  let [error, setError] = useState('');
 
   // returns whether username is taken
   async function usernameTaken() {
@@ -30,7 +31,7 @@ function SignUp() {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch(e) {
-      alert(e.message);
+      setError(e.message);
       return;
     };
     // set display name
@@ -49,52 +50,58 @@ function SignUp() {
   }
 
   return (
-    <div className="SignUp">
-      <form onSubmit={signUp}>
+    <div className="SignUp Form">
+      <form onSubmit={signUp} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>
-        <div>
-          {/* Email */}
-          <input
-          value={email}
-          type="email"
-          placeholder="email"
-          onChange={e => setEmail(e.target.value)}
-          required
-          />
-          {/* Password */}
-          <input
-          value={password}
-          type="password"
-          placeholder="password"
-          onChange={e => setPassword(e.target.value)}
-          required
-          />
-        </div>
-        <div>
-          {/* Display Name */}
-          <input
-          value={displayName}
-          type="text"
-          placeholder="display name"
-          onChange={e => setDisplayName(e.target.value)}
-          pattern="[A-Za-z ]{1,32}"
-          required
-          />
-          {/* Username */}
-          <input
-          value={username}
-          type="text"
-          placeholder="username"
-          onChange={e => setUsername(e.target.value)}
-          pattern="[A-Za-z0-9_]{3,16}"
-          required
-          />
-        </div>
+        {/* Email */}
+        <label htmlFor="emailInput">Email</label>
+        <input
+        value={email}
+        type="email"
+        id="emailInput"
+        placeholder="email@example.com"
+        onChange={e => setEmail(e.target.value)}
+        required
+        />
+        {/* Password */}
+        <label htmlFor="passwordInput">Password</label>
+        <input
+        value={password}
+        type="password"
+        id="passwordInput"
+        placeholder="password"
+        onChange={e => setPassword(e.target.value)}
+        required
+        />
+        {/* Display Name */}
+        <label htmlFor="displayNameInput">Display Name</label>
+        <input
+        value={displayName}
+        type="text"
+        id="displayNameInput"
+        placeholder="John Doe"
+        onChange={e => setDisplayName(e.target.value)}
+        pattern="[A-Za-z ]{1,32}"
+        required
+        />
+        {/* Username */}
+        <label htmlFor="usernameInput">Username</label>
+        <input
+        value={username}
+        type="text"
+        id="usernameInput"
+        placeholder="johndoe"
+        onChange={e => setUsername(e.target.value)}
+        pattern="[A-Za-z0-9_]{3,16}"
+        required
+        />
         {/* Button */}
         <button type="submit" className="hover-shadow">Sign Up</button>
         {/* Sign in */}
         <Link to="/signin" className="link">Already have an account? Sign in</Link>
+        {/* Error */}
+        { error && <p className="error text-center">{error}</p> }
       </form>
     </div>
   );
