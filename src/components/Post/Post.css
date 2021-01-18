@@ -6,3 +6,15 @@
   padding: 10px;
   border-radius: 10px;
 }
+
+.Post h1 {
+  font-size: 24px;
+}
+
+.Post h2 {
+  font-size: 12px;
+}
+
+.Post p {
+  margin: 10px 0;
+}

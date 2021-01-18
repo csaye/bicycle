@@ -1,12 +1,17 @@
 import firebase from 'firebase/app';
-
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import Post from '../Post/Post.js';
 
-function PostList() {
+// PostList component
+function PostList(props) {
+  const uid = props.uid;
+
+  // get posts from corresponding uid
   const postsRef = firebase.firestore().collection('posts');
-  const query = postsRef.where('uid', '==', firebase.auth().currentUser.uid);
+  const query = postsRef
+  .where('uid', '==', uid)
+  .orderBy('createdAt');
   const [posts] = useCollectionData(query, {idField: 'id'});
 
   return (
