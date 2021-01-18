@@ -9,8 +9,6 @@ import SignUp from '../SignUp/SignUp.js';
 import Home from '../Home/Home.js';
 
 import firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/firestore';
 import { firebaseConfig } from '../../util/firebaseConfig.js';
 
 // initialize firebase
