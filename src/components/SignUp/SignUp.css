@@ -1,0 +1,27 @@
+.SignUp {
+  background-color: #efefef;
+  width: 500px;
+  margin: 100px auto;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.SignUp form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.SignUp button, .SignUp .link, .SignUp h1 {
+  margin: 5px 0;
+}
+
+.SignUp input {
+  margin: 5px;
+}
+
+.SignUp h1 {
+  font-size: 42px;
+}

@@ -1,4 +1,6 @@
+import './SignIn.css';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 
 // SignIn component
@@ -18,26 +20,30 @@ function SignIn() {
   return (
     <div className="SignIn">
       <form onSubmit={signIn}>
-        {/* Email */}
-        <label htmlFor="emailInput">Email</label>
-        <input
-        value={email}
-        type="email"
-        id="emailInput"
-        onChange={e => setEmail(e.target.value)}
-        required
-        />
-        {/* Password */}
-        <label htmlFor="passwordInput">Password</label>
-        <input
-        value={password}
-        type="password"
-        id="passwordInput"
-        onChange={e => setPassword(e.target.value)}
-        required
-        />
+        {/* Title */}
+        <h1>Bicycle</h1>
+        <div>
+          {/* Email */}
+          <input
+          value={email}
+          type="email"
+          placeholder="email"
+          onChange={e => setEmail(e.target.value)}
+          required
+          />
+          {/* Password */}
+          <input
+          value={password}
+          type="password"
+          placeholder="password"
+          onChange={e => setPassword(e.target.value)}
+          required
+          />
+        </div>
         {/* Button */}
-        <button type="submit">Sign In</button>
+        <button type="submit" className="hover-shadow">Sign In</button>
+        {/* Sign up */}
+        <Link to="/signup" className="link">No account? Sign up</Link>
       </form>
     </div>
   );
