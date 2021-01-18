@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-// import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 // SignUp component
 function SignUp() {
@@ -10,9 +9,6 @@ function SignUp() {
   let [password, setPassword] = useState('');
   let [displayName, setDisplayName] = useState('');
   let [username, setUsername] = useState('');
-
-  // const usersRef = firebase.firestore().collection('users').get();
-  // const [users] = useCollectionData(usersRef);
 
   // returns whether username is taken
   async function usernameTaken() {

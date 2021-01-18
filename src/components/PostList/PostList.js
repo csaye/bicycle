@@ -11,7 +11,7 @@ function PostList(props) {
   const postsRef = firebase.firestore().collection('posts');
   const query = postsRef
   .where('uid', '==', uid)
-  .orderBy('createdAt');
+  .orderBy('createdAt', 'desc');
   const [posts] = useCollectionData(query, {idField: 'id'});
 
   return (
