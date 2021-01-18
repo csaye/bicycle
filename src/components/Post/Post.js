@@ -15,7 +15,7 @@ function Post(props) {
       <h2>{createdAt.toDate().toDateString()} {createdAt.toDate().toLocaleTimeString()}</h2>
       <p>{content}</p>
       {
-        uid === firebase.auth().currentUser.uid &&
+        firebase.auth().currentUser?.uid === uid &&
         <button onClick={deletePost}>Delete</button>
       }
     </div>

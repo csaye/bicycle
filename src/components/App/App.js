@@ -7,6 +7,7 @@ import Navbar from '../Navbar/Navbar.js';
 import SignIn from '../SignIn/SignIn.js';
 import SignUp from '../SignUp/SignUp.js';
 import Profile from '../Profile/Profile.js';
+import UserList from '../UserList/UserList.js';
 
 import firebase from 'firebase/app';
 import { firebaseConfig } from '../../util/firebaseConfig.js';
@@ -44,11 +45,12 @@ function Page() {
     const userData = await firebase.firestore().collection('users').doc(uid).get();
     setUsername(userData.data()?.username);
   }
+  // getUsername();
 
   // get username when auth state changed
   useEffect(() => {
     firebase.auth().onAuthStateChanged(() => {
-        getUsername();
+      getUsername();
     });
   });
 
@@ -65,18 +67,27 @@ function Page() {
       <Switch>
         {/* signin page */}
         <Route path="/signin">
-          { firebase.auth().currentUser ?
-            <Redirect to={`/${username}`} /> :
-            <SignIn />
-          }
+        {
+          firebase.auth().currentUser ?
+          <Redirect to={`/${username}`} /> :
+          <SignIn />
+        }
         </Route>
         {/* signup page */}
         <Route path="/signup">
-          {
-            firebase.auth().currentUser ?
-            <Redirect to={`/${username}`} /> :
-            <SignUp />
-          }
+        {
+          firebase.auth().currentUser ?
+          <Redirect to={`/${username}`} /> :
+          <SignUp />
+        }
+        </Route>
+        {/* users page */}
+        <Route path="/users">
+        {
+          firebase.auth().currentUser ?
+          <UserList /> :
+          <Redirect to="/signin" />
+        }
         </Route>
         {/* username page */}
         <Route path="/:username">
@@ -84,10 +95,11 @@ function Page() {
         </Route>
         {/* no page */}
         <Route path="/">
-          {
-            firebase.auth().currentUser ?
-            <Redirect to={`/${username}`} /> :
-            <Redirect to="/signin" /> }
+        {
+          firebase.auth().currentUser ?
+          <Redirect to={`/${username}`} /> :
+          <Redirect to="/signin" />
+        }
         </Route>
       </Switch>
     </div>

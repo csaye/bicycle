@@ -19,13 +19,16 @@ function Profile() {
     .limit(1)
     .get();
     // set uid
-    setUid(snapshot.docs[0].id);
+    if (snapshot.docs.length > 0) {
+      setUid(snapshot.docs[0].id);
+    }
   }
+  // getUid();
 
   // get uid when auth state changed
   useEffect(() => {
     firebase.auth().onAuthStateChanged(() => {
-        getUid();
+      getUid();
     });
   });
 
@@ -53,7 +56,9 @@ function Profile() {
   // if no uid yet, wait
   if (!uid) {
     return (
-      <div className="Profile"></div>
+      <div className="Profile">
+        <p>Could not find this user</p>
+      </div>
     );
   }
 
@@ -62,7 +67,7 @@ function Profile() {
     <div className="Profile">
       {
         // if own page, show post form
-        firebase.auth().currentUser.uid === uid &&
+        firebase.auth().currentUser?.uid === uid &&
         <form onSubmit={makePost}>
           {/* Content */}
           <label htmlFor="contentInput">Content</label>

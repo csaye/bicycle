@@ -11,11 +11,15 @@ function Navbar() {
 
   return (
     <div className="Navbar">
-      <p>Bicycle</p>
+      <Link to="/" className="link">Bicycle</Link>
       <div className="flex-fill"></div>
       {
         firebase.auth().currentUser &&
         <Link to="/" className="link">Home</Link>
+      }
+      {
+        firebase.auth().currentUser &&
+        <Link to="/users" className="link">Users</Link>
       }
       {
         !firebase.auth().currentUser &&
