@@ -7,14 +7,15 @@ function SignIn() {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
 
-  let [error, setError] = useState('');
+  let [error, setError] = useState(undefined);
 
   async function signIn(e) {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
+      setError(undefined);
     } catch(e) {
-      setError(e.message);
+      setError("Incorrect email or password. Please try again.");
     }
   }
 
@@ -44,7 +45,7 @@ function SignIn() {
         required
         />
         {/* Button */}
-        <button type="submit" className="hover-shadow">Sign In</button>
+        <button type="submit">Sign In</button>
         {/* Sign up */}
         <Link to="/signup" className="link">No account? Sign up</Link>
         {/* Error */}

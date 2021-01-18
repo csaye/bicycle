@@ -44,6 +44,10 @@ button {
   margin-bottom: 10px;
 }
 
+.Form label {
+  margin: 0;
+}
+
 .Form h1 {
   font-size: 42px;
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from '../Navbar/Navbar.js';
 import SignIn from '../SignIn/SignIn.js';

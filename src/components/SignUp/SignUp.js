@@ -22,9 +22,24 @@ function SignUp() {
 
   async function signUp(e) {
     e.preventDefault();
+    // verify display name length
+    if (displayName.length < 1 || displayName.length > 32) {
+      setError("Display name must be between 1 and 32 characters.");
+      return;
+    }
+    // verify username chars
+    if (!/^([A-Za-z0-9_]{0,})$/.test(username)) {
+      setError("Username can only contain alphanumeric characters and underscore.");
+      return;
+    }
+    // verify username length
+    if (username.length < 3 || username.length > 16) {
+      setError("Username must be between 3 and 16 characters.");
+      return;
+    }
     // if username taken, return
     if (await usernameTaken()) {
-      alert("That username is taken. Please try another.");
+      setError("Username taken. Please try another.");
       return;
     }
     // create user
@@ -34,6 +49,7 @@ function SignUp() {
       setError(e.message);
       return;
     };
+
     // set display name
     await firebase.auth().currentUser.updateProfile({
       displayName: displayName
@@ -82,7 +98,6 @@ function SignUp() {
         id="displayNameInput"
         placeholder="John Doe"
         onChange={e => setDisplayName(e.target.value)}
-        pattern="[A-Za-z ]{1,32}"
         required
         />
         {/* Username */}
@@ -93,15 +108,14 @@ function SignUp() {
         id="usernameInput"
         placeholder="johndoe"
         onChange={e => setUsername(e.target.value)}
-        pattern="[A-Za-z0-9_]{3,16}"
         required
         />
         {/* Button */}
-        <button type="submit" className="hover-shadow">Sign Up</button>
+        <button type="submit">Sign Up</button>
         {/* Sign in */}
         <Link to="/signin" className="link">Already have an account? Sign in</Link>
         {/* Error */}
-        { error && <p className="error text-center">{error}</p> }
+        { error && <p className="text-danger text-center">{error}</p> }
       </form>
     </div>
   );
