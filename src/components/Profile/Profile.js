@@ -10,8 +10,10 @@ function Profile() {
   // get username from url
   const { username } = useParams();
 
-  // get uid from username
+  // get uid and display name from username
+  let [displayName, setDisplayName] = useState(undefined);
   let [uid, setUid] = useState(undefined);
+
   async function getUid() {
     // get snapshot
     const usersRef = firebase.firestore().collection('users');
@@ -21,10 +23,10 @@ function Profile() {
     .get();
     // set uid
     if (snapshot.docs.length > 0) {
+      setDisplayName(snapshot.docs[0].data().displayName);
       setUid(snapshot.docs[0].id);
     }
   }
-  // getUid();
 
   // get uid when auth state changed
   useEffect(() => {
@@ -54,8 +56,8 @@ function Profile() {
     setContent('');
   }
 
-  // if no uid yet, wait
-  if (!uid) {
+  // if no uid and display name yet, wait
+  if (!uid || !displayName) {
     return (
       <div className="Profile">
         <p>Could not find this user</p>
@@ -66,6 +68,8 @@ function Profile() {
   // if valid uid, show profile
   return (
     <div className="Profile">
+      <h1 className="profile-title">{displayName}</h1>
+      <h2 className="profile-subtitle">@{username}</h2>
       {
         // if own page, show post form
         firebase.auth().currentUser?.uid === uid &&

@@ -45,7 +45,6 @@ function Page() {
     const userData = await firebase.firestore().collection('users').doc(uid).get();
     setUsername(userData.data()?.username);
   }
-  // getUsername();
 
   // get username when auth state changed
   useEffect(() => {
