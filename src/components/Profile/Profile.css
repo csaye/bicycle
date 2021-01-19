@@ -1,17 +1,17 @@
+.Profile {
+  margin: 10px;
+}
+
 .Profile form {
-  margin: 20px;
+  margin: 0 10px;
 }
 
 .Profile .profile-title {
-  margin: 20px 0 0 20px;
+  margin: 10px 0 0 10px;
   font-size: 36px;
 }
 
 .Profile .profile-subtitle {
-  margin-left: 20px;
+  margin-left: 10px;
   font-size: 24px;
-}
-
-.Profile .no-posts-yet {
-  margin-left: 20px;
 }

@@ -1,0 +1,21 @@
+.PostList .posts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.PostList .no-posts-yet {
+  margin-left: 10px;
+}
+
+.PostList .post-button {
+  margin: 0 5px;
+}
+
+.PostList .post-length {
+  display: inline-block;
+}
+
+.PostList .post-list {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -63,6 +63,15 @@ function Settings() {
 
   // deletes a user and all of their posts
   async function deleteAccount() {
+    // delete account
+    let errorOccured = false;
+    await firebase.auth().currentUser.delete()
+    .catch((e) => {
+      setError(e.message);
+      errorOccured = true;
+    });
+    if (errorOccured) return;
+
     // delete user reference
     const uid = firebase.auth().currentUser.uid;
     await firebase.firestore().collection('users').doc(uid).delete();
@@ -79,10 +88,6 @@ function Settings() {
       // commit batch
       batch.commit();
     });
-
-    // delete account
-    await firebase.auth().currentUser.delete()
-    .catch((e) => setError(e.message));
   }
 
   return (

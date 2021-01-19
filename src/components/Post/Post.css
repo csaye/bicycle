@@ -1,18 +1,27 @@
 .Post {
   background-color: #efefef;
-  max-width: 200px;
+  max-width: 300px;
   word-break: break-word;
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
   border-radius: 10px;
 }
 
 .Post h1 {
+  display: inline-block;
   font-size: 24px;
+  margin-right: 5px;
+}
+
+.Post .link {
+  display: inline-block;
+  margin: 0;
 }
 
 .Post h2 {
   font-size: 12px;
+  margin: 0;
+  color: #999;
 }
 
 .Post p {

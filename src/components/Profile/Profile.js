@@ -13,7 +13,6 @@ function Profile() {
   // get user data from username
   let [displayName, setDisplayName] = useState(undefined);
   let [uid, setUid] = useState(undefined);
-
   async function getUserData() {
     // get snapshot
     const usersRef = firebase.firestore().collection('users');
@@ -35,28 +34,7 @@ function Profile() {
     });
   });
 
-  const [content, setContent] = useState('');
-
-  // makes post with current content
-  async function makePost(e) {
-    e.preventDefault();
-    // check content length
-    if (content.length > 64) {
-      alert('Content cannot be longer than 64 characters.');
-      return;
-    }
-    // add post to collection
-    await firebase.firestore().collection('posts').add({
-      uid: firebase.auth().currentUser.uid,
-      displayName: firebase.auth().currentUser.displayName,
-      content: content,
-      createdAt: new Date()
-    });
-    // reset content field
-    setContent('');
-  }
-
-  // if no uid and display name yet, wait
+  // if invalid data, wait
   if (!uid || !displayName) {
     return (
       <div className="Profile">
@@ -65,28 +43,12 @@ function Profile() {
     );
   }
 
-  // if valid uid, show profile
+  // if valid data, show profile
   return (
     <div className="Profile">
       <h1 className="profile-title">{displayName}</h1>
       <h2 className="profile-subtitle">@{username}</h2>
-      {
-        // if own page, show post form
-        firebase.auth().currentUser?.uid === uid &&
-        <form onSubmit={makePost}>
-          {/* Content */}
-          <input
-          value={content}
-          type="text"
-          placeholder="content"
-          onChange={e => setContent(e.target.value)}
-          required
-          />
-          {/* Button */}
-          <button type="submit">Post</button>
-        </form>
-      }
-      <PostList uid={uid} />
+      <PostList uid={uid} displayName={displayName} username={username} />
     </div>
   )
 }
