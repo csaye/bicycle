@@ -1,3 +1,7 @@
 .Settings input {
   margin: 0 5px;
 }
+
+.Settings .cancel-button {
+  margin-left: 5px;
+}

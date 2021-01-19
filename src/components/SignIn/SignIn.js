@@ -14,6 +14,8 @@ function SignIn() {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       setError(undefined);
+      // go to home page
+      window.location.href = '/';
     } catch(e) {
       setError("Incorrect email or password. Please try again.");
     }
