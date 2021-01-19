@@ -10,28 +10,28 @@ function Profile() {
   // get username from url
   const { username } = useParams();
 
-  // get uid and display name from username
+  // get user data from username
   let [displayName, setDisplayName] = useState(undefined);
   let [uid, setUid] = useState(undefined);
 
-  async function getUid() {
+  async function getUserData() {
     // get snapshot
     const usersRef = firebase.firestore().collection('users');
     const snapshot = await usersRef
     .where('username', '==', username)
     .limit(1)
     .get();
-    // set uid
+    // set data
     if (snapshot.docs.length > 0) {
       setDisplayName(snapshot.docs[0].data().displayName);
       setUid(snapshot.docs[0].id);
     }
   }
 
-  // get uid when auth state changed
+  // get user data when auth state changed
   useEffect(() => {
     firebase.auth().onAuthStateChanged(() => {
-      getUid();
+      getUserData();
     });
   });
 

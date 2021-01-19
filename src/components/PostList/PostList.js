@@ -19,7 +19,7 @@ function PostList(props) {
       {
         posts?.length > 0 ?
         posts.map(p => <Post key={p.id} data={p} />) :
-        <p>No posts yet</p>
+        <p className="no-posts-yet">No posts yet</p>
       }
     </div>
   );

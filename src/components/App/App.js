@@ -8,8 +8,11 @@ import SignIn from '../SignIn/SignIn.js';
 import SignUp from '../SignUp/SignUp.js';
 import Profile from '../Profile/Profile.js';
 import UserList from '../UserList/UserList.js';
+import Settings from '../Settings/Settings.js';
 
 import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 import { firebaseConfig } from '../../util/firebaseConfig.js';
 
 // initialize firebase
@@ -85,6 +88,14 @@ function Page() {
         {
           firebase.auth().currentUser ?
           <UserList /> :
+          <Redirect to="/signin" />
+        }
+        </Route>
+        {/* settings page */}
+        <Route path="/settings">
+        {
+          firebase.auth().currentUser ?
+          <Settings /> :
           <Redirect to="/signin" />
         }
         </Route>

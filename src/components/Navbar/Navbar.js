@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <div className="Navbar">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <a className="navbar-brand" href="/"><img src={logo} alt="logo" /></a>
+        <Link className="navbar-brand" to="/"><img src={logo} alt="logo" /></Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -38,6 +38,12 @@ function Navbar() {
               firebase.auth().currentUser &&
               <li className="nav-item">
                 <Link to="/users" className="link">Users</Link>
+              </li>
+            }
+            {
+              firebase.auth().currentUser &&
+              <li className="nav-item">
+                <Link to="/settings" className="link">Settings</Link>
               </li>
             }
             {

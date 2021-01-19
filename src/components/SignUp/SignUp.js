@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+
+import { usernameTaken } from '../../util/usernameData.js';
 
 // SignUp component
 function SignUp() {
@@ -12,13 +12,6 @@ function SignUp() {
   let [username, setUsername] = useState('');
 
   let [error, setError] = useState('');
-
-  // returns whether username is taken
-  async function usernameTaken() {
-    const snapshot = await firebase.firestore().collection('users').get();
-    const users = snapshot.docs.map(d => d.data());
-    return users.some((user) => user.username === username);
-  }
 
   async function signUp(e) {
     e.preventDefault();
@@ -38,7 +31,7 @@ function SignUp() {
       return;
     }
     // if username taken, return
-    if (await usernameTaken()) {
+    if (await usernameTaken(username)) {
       setError("Username taken. Please try another.");
       return;
     }
@@ -96,7 +89,7 @@ function SignUp() {
         value={displayName}
         type="text"
         id="displayNameInput"
-        placeholder="John Doe"
+        placeholder="Display Name"
         onChange={e => setDisplayName(e.target.value)}
         required
         />
@@ -106,7 +99,7 @@ function SignUp() {
         value={username}
         type="text"
         id="usernameInput"
-        placeholder="johndoe"
+        placeholder="username"
         onChange={e => setUsername(e.target.value)}
         required
         />
