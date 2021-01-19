@@ -1,9 +1,6 @@
 .Navbar {
   background-color: #efefef;
   min-height: 75px;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
 }
 
 .navbar-brand img {
@@ -14,10 +11,28 @@
     float: right;
 }
 
-.Navbar button {
-  margin: 5px 0;
+.navbar-nav .nav-item {
+  margin: auto 0;
 }
 
-.Navbar p, .Navbar .link, .Navbar button, .Navbar input {
-  margin: 10px 20px;
+/* Top */
+@media (min-width: 992px) {
+  .Navbar .link {
+    margin-right: 20px;
+  }
+  .Navbar .sign-out-button {
+    margin-left: 20px;
+  }
+}
+/* Dropdown */
+@media (max-width: 991px) {
+  .Navbar button, .Navbar input {
+    margin-top: 10px;
+  }
+  .Navbar .link {
+    margin-top: 5px;
+  }
+  .Navbar .sign-out-button {
+    margin-bottom: 10px;
+  }
 }

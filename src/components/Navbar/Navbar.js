@@ -52,13 +52,6 @@ function Navbar() {
                 <Link to="/signup" className="link">Sign up</Link>
               </li>
             }
-            {
-              firebase.auth().currentUser &&
-              <li className="nav-item">
-                <button onClick={signOut}>Sign Out</button>
-                <p>Signed in as {firebase.auth().currentUser.displayName}</p>
-              </li>
-            }
             {/* Search User */}
             {
               firebase.auth().currentUser &&
@@ -74,6 +67,12 @@ function Navbar() {
                   required
                   />
                 </form>
+              </li>
+            }
+            {
+              firebase.auth().currentUser &&
+              <li className="nav-item">
+                <button className="sign-out-button" onClick={signOut}>Sign Out</button>
               </li>
             }
             </ul>
