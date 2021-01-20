@@ -59,7 +59,7 @@ function SignUp() {
   }
 
   return (
-    <div className="SignUp Form">
+    <div className="SignUp Form shadowed">
       <form onSubmit={signUp} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>

@@ -1,17 +1,50 @@
 .Post {
   background-color: #efefef;
-  max-width: 300px;
   word-break: break-word;
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px #999;
 }
+
+/* post width */
+
+/* 1 to a row */
+@media (min-width: 320px) {
+  .Post {
+    width: 100%;
+  }
+}
+/* 2 to a row */
+@media (min-width: 576px) {
+  .Post {
+    width: calc((100% - (2 * 20px)) / 2);
+  }
+}
+/* 3 to a row */
+@media (min-width: 768px) {
+  .Post {
+    width: calc((100% - (3 * 20px)) / 3);
+  }
+}
+/* 4 to a row */
+@media (min-width: 992px) {
+  .Post {
+    width: calc((100% - (4 * 20px)) / 4);
+  }
+}
+/* 5 to a row */
+@media (min-width: 1200px) {
+  .Post {
+    width: calc((100% - (5 * 20px)) / 5);
+  }
+}
+
+/* end post width */
 
 .Post h1 {
   display: inline-block;
   font-size: 24px;
-  margin-right: 5px;
+  margin: 0 5px 0 0;
 }
 
 .Post .link {

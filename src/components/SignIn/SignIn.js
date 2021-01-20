@@ -22,7 +22,7 @@ function SignIn() {
   }
 
   return (
-    <div className="SignIn Form">
+    <div className="SignIn Form shadowed">
       <form onSubmit={signIn} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>

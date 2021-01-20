@@ -60,10 +60,11 @@ function Settings() {
     // return if no profile picture
     if (!profilePicture) {
       setError("Please upload a profile picture.");
+    // upload profile picture to storage
     } else {
       const uid = firebase.auth().currentUser.uid;
-      const storageRef = firebase.storage().ref(uid + '/profilePicture/' + profilePicture.name);
-      await storageRef.put(profilePicture).catch(e => setError("Invalid file. Please use an image with size under 5MB."));
+      const storageRef = firebase.storage().ref(uid + '/profilePicture/profilePicture');
+      await storageRef.put(profilePicture).catch(e => setError(e.message));
     }
   }
 
@@ -106,7 +107,7 @@ function Settings() {
   }
 
   return (
-    <div className="Settings Form flex-col">
+    <div className="Settings Form shadowed flex-col">
       <h1>Settings</h1>
       {/* Display Name */}
       <form onSubmit={changeDisplayName}>

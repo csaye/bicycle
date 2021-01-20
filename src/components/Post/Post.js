@@ -13,7 +13,7 @@ function Post(props) {
   }
 
   return (
-    <div className="Post">
+    <div className="Post hover-shadow">
       <h1>{displayName}</h1>
       <Link to={`/${username}`} className="link">@{username}</Link>
       <h2>{createdAt.toDate().toDateString()} {createdAt.toDate().toLocaleTimeString()}</h2>
