@@ -7,7 +7,7 @@ import Navbar from '../Navbar/Navbar.js';
 import SignIn from '../SignIn/SignIn.js';
 import SignUp from '../SignUp/SignUp.js';
 import Profile from '../Profile/Profile.js';
-import UserList from '../UserList/UserList.js';
+// import UserList from '../UserList/UserList.js';
 import Settings from '../Settings/Settings.js';
 import About from '../About/About.js';
 import Friends from '../Friends/Friends.js';
@@ -87,13 +87,13 @@ function Page() {
         }
         </Route>
         {/* users page */}
-        <Route path="/users">
+        {/*<Route path="/users">
         {
           firebase.auth().currentUser ?
           <UserList /> :
           <Redirect to="/signin" />
         }
-        </Route>
+        </Route>*/}
         {/* friends page */}
         <Route path="/friends">
         {

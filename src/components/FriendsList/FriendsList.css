@@ -1,3 +1,16 @@
-.FriendsList {
+.FriendsList .friends-users {
   display: flex;
+}
+.FriendsList .User {
+  width: 180px;
+}
+
+.FriendsList .friends-posts {
+  display: flex;
+}
+.FriendsList .PostList {
+  width: 200px;
+}
+.FriendsList .PostList .Post {
+  width: 180px;
 }

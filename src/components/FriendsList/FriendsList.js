@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import User from '../User/User.js';
+import PostList from '../PostList/PostList.js';
 
 // FriendsList component
 function FriendsList(props) {
@@ -25,11 +26,19 @@ function FriendsList(props) {
 
   return (
     <div className="FriendsList">
-      {
-        friends?.length > 0 ?
-        friends.map(u => <User key={u.id} data={u} />) :
-        <p>No friends yet. Better invite some!</p>
-      }
+      <div className="friends-users">
+        {
+          friends?.length > 0 ?
+          friends.map(u => <User key={u.id} data={u} />) :
+          <p>No friends yet. Better invite some!</p>
+        }
+      </div>
+      <div className="friends-posts">
+        {
+          friends?.length > 0 &&
+          friends.map(u => <PostList key={u.id} uid={u.id} displayName={u.displayName} username={u.username} />)
+        }
+      </div>
     </div>
   )
 }

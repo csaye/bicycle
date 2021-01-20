@@ -34,12 +34,12 @@ function Navbar() {
                 <Link to="/" className="link">Home</Link>
               </li>
             }
-            {
+            {/*
               firebase.auth().currentUser &&
               <li className="nav-item">
                 <Link to="/users" className="link">Users</Link>
               </li>
-            }
+            */}
             {
               firebase.auth().currentUser &&
               <li className="nav-item">

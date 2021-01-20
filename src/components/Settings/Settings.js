@@ -193,7 +193,7 @@ function Settings() {
             />
             <button type="submit">Yes, delete account</button>
           </form>
-          <button onClick={cancelDelete} className="cancel-button">Cancel</button>
+          <button onClick={cancelDelete} className="cancel-button">Cancel, do not delete account</button>
         </div>
       }
     </div>
