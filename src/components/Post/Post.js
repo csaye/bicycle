@@ -20,7 +20,7 @@ function Post(props) {
       <p>{content}</p>
       {
         firebase.auth().currentUser?.uid === uid &&
-        <button onClick={deletePost}>Delete</button>
+        <button onClick={deletePost}>Delete post</button>
       }
     </div>
   );

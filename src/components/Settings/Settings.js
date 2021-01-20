@@ -10,6 +10,7 @@ function Settings() {
 
   let [error, setError] = useState('');
   let [deleting, setDeleting] = useState(false);
+  let [password, setPassword] = useState('');
 
   async function changeDisplayName(e) {
     e.preventDefault();
@@ -64,12 +65,14 @@ function Settings() {
     } else {
       const uid = firebase.auth().currentUser.uid;
       const storageRef = firebase.storage().ref(uid + '/profilePicture/profilePicture');
-      await storageRef.put(profilePicture).catch(e => setError(e.message));
+      await storageRef.put(profilePicture)
+      .then(() => window.location.href = "/")
+      .catch(e => setError("Upload failed. Please use an image file with size under 3MB."));
     }
   }
 
   function startDelete() {
-    setError("Are you sure you want to permanently delete your account? All your posts will be deleted.");
+    setError("Re-enter password to permanently delete account and all posts.");
     setDeleting(true);
   }
   function cancelDelete() {
@@ -78,15 +81,25 @@ function Settings() {
   }
 
   // deletes a user and all of their posts
-  async function deleteAccount() {
-    // delete account
-    let errorOccured = false;
-    await firebase.auth().currentUser.delete()
-    .catch((e) => {
-      setError(e.message);
-      errorOccured = true;
-    });
-    if (errorOccured) return;
+  async function deleteAccount(e) {
+    e.preventDefault();
+    setError('');
+
+    // sign in user again
+    const email = firebase.auth().currentUser.email;
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    // set error and return on catch
+    } catch (e) {
+      if (e.code === 'auth/wrong-password') {
+        setError('Incorrect password. Please try again.');
+      } else if (e.code === 'auth/too-many-requests') {
+        setError('Too many sign in requests. Please try again later.')
+      } else {
+        setError(e.message);
+      }
+      return;
+    }
 
     // delete user reference
     const uid = firebase.auth().currentUser.uid;
@@ -103,6 +116,20 @@ function Settings() {
       });
       // commit batch
       batch.commit();
+    });
+
+    // if profile pic exists
+    const listResult = await firebase.storage().ref(uid + '/profilePicture').listAll();
+    if (listResult.items.length > 0) {
+      // delete profile pic
+      const storageRef = firebase.storage().ref(uid + '/profilePicture/profilePicture');
+      await storageRef.delete().catch(e => console.log(e));
+    }
+
+    // delete account
+    await firebase.auth().currentUser.delete()
+    .catch((e) => {
+      setError(e.message);
     });
   }
 
@@ -152,8 +179,20 @@ function Settings() {
       {/* Delete Button */}
       {
         deleting &&
-        <div>
-          <button onClick={deleteAccount}>Yes, delete my account permanently</button>
+        <div className="flex-col">
+          <form onSubmit={deleteAccount}>
+            {/* Password */}
+            <label htmlFor="passwordInput">Password</label>
+            <input
+            value={password}
+            type="password"
+            id="passwordInput"
+            placeholder="password"
+            onChange={e => setPassword(e.target.value)}
+            required
+            />
+            <button type="submit">Yes, delete account</button>
+          </form>
           <button onClick={cancelDelete} className="cancel-button">Cancel</button>
         </div>
       }

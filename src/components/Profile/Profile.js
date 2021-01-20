@@ -1,5 +1,6 @@
 import './Profile.css';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import firebase from 'firebase/app';
 import defaultProfile from '../../img/defaultProfile.png';
@@ -62,7 +63,7 @@ function Profile() {
     <div className="Profile">
       <img className="profile-picture" src={profileURL ? profileURL : defaultProfile} alt="profile pic" />
       <p className="profile-title">{displayName}</p>
-      <h2 className="profile-subtitle">@{username}</h2>
+      <h3><Link to={`/${username}`} className="profile-subtitle">@{username}</Link></h3>
       <PostList uid={uid} displayName={displayName} username={username} />
     </div>
   )

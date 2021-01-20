@@ -11,13 +11,22 @@ function SignIn() {
 
   async function signIn(e) {
     e.preventDefault();
+    setError(undefined);
+    // try to sign in and go to home page
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      setError(undefined);
-      // go to home page
       window.location.href = '/';
+    // catch error
     } catch(e) {
-      setError("Incorrect email or password. Please try again.");
+      if (e.code === 'auth/user-not-found') {
+        setError('Unknown email. Please try again.');
+      } else if (e.code === 'auth/wrong-password') {
+        setError('Incorrect password. Please try again.');
+      } else if (e.code === 'auth/too-many-requests') {
+        setError('Too many sign in requests. Please try again later.')
+      } else {
+        setError(e.message);
+      }
     }
   }
 

@@ -2,10 +2,6 @@
   margin: 10px;
 }
 
-.Profile form {
-  margin: 15px 0 0 10px;
-}
-
 .Profile .profile-picture {
   width: 60px;
   height: 60px;
@@ -24,6 +20,6 @@
 }
 
 .Profile .profile-subtitle {
-  margin: 0 0 0 10px;
+  margin-left: 10px;
   font-size: 24px;
 }
