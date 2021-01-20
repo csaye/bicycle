@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PostList.css';
 import firebase from 'firebase/app';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 
 import Post from '../Post/Post.js';
 
@@ -10,16 +10,21 @@ const maxPosts = 64;
 
 // PostList component
 function PostList(props) {
-  const uid = props.uid;
+  const postUid = props.uid;
   const username = props.username;
   const displayName = props.displayName;
 
-  // get posts from corresponding uid
+  const currentUid = firebase.auth().currentUser?.uid;
+
+  // get posts from post uid
   const postsRef = firebase.firestore().collection('posts');
-  const query = postsRef
-  .where('uid', '==', uid)
+  const postsQuery = postsRef
+  .where('uid', '==', postUid)
   .orderBy('createdAt', 'desc');
-  const [posts] = useCollectionData(query, {idField: 'id'});
+  const [posts] = useCollectionData(postsQuery, {idField: 'id'});
+  // get user doc from current uid for friends
+  const userDocRef = firebase.firestore().collection('users').doc(currentUid);
+  const [userDoc] = useDocumentData(userDocRef);
 
   // makes post with current content
   const [content, setContent] = useState('');
@@ -37,7 +42,6 @@ function PostList(props) {
     // add post to collection
     await firebase.firestore().collection('posts').add({
       uid: firebase.auth().currentUser.uid,
-      displayName: firebase.auth().currentUser.displayName,
       content: content,
       createdAt: new Date()
     });
@@ -45,11 +49,40 @@ function PostList(props) {
     setContent('');
   }
 
+  async function updateFriend(addingFriend) {
+    // return if current uid null or self
+    if (!currentUid) return;
+    if (currentUid === postUid) return;
+
+    // get friends list
+    const docRef = firebase.firestore().collection('users').doc(currentUid);
+    const userData = await docRef.get();
+    const friendsList = userData.data().friends;
+
+    // return if adding friend and friends includes poster
+    if (addingFriend && friendsList.includes(postUid)) return;
+    // return if removing friend and friends does not includes poster
+    if (!addingFriend && !friendsList.includes(postUid)) return;
+
+    // slice and update new friends list
+    const newFriendsList = friendsList.slice();
+    if (addingFriend) {
+      newFriendsList.push(postUid);
+    } else {
+      newFriendsList.splice(newFriendsList.indexOf(postUid), 1);
+    }
+
+    // update friends list
+    await docRef.update({
+      friends: newFriendsList
+    });
+  }
+
   return (
     <div className="PostList">
       {
         // if own page, show post form
-        firebase.auth().currentUser?.uid === uid &&
+        firebase.auth().currentUser?.uid === postUid &&
         <div>
           <form onSubmit={makePost}>
             {/* Content */}
@@ -65,6 +98,17 @@ function PostList(props) {
             <button type="submit" className="post-button">Post</button>
             <p className="post-length">{content.length}/{maxPostLength} chars | {posts ? posts.length : 0}/{maxPosts} posts</p>
           </form>
+        </div>
+      }
+      {
+        // if logged in, not own page, and friends ready, show friend button
+        (firebase.auth().currentUser && firebase.auth().currentUser?.uid !== postUid && userDoc?.friends) &&
+        <div>
+          {
+            !userDoc.friends.includes(postUid) ?
+            <button onClick={() => updateFriend(true)} className="friend-button">Friend {displayName}</button> :
+            <button onClick={() => updateFriend(false)} className="friend-button">Unfriend {displayName}</button>
+          }
         </div>
       }
       <div className="posts">

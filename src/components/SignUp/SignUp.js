@@ -52,7 +52,8 @@ function SignUp() {
     await firebase.firestore().collection('users').doc(uid).set({
       username: username,
       displayName: displayName,
-      registered: new Date()
+      registered: new Date(),
+      friends: []
     });
     // go to home page
     window.location.href = '/';
