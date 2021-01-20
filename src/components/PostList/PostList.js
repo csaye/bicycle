@@ -78,6 +78,14 @@ function PostList(props) {
     });
   }
 
+  if (!posts) {
+    return (
+      <div className="PostList">
+        <p>Retrieving posts...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="PostList">
       {

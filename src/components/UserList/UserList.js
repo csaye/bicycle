@@ -11,6 +11,14 @@ function UserList() {
   const query = usersRef.orderBy('username');
   const [users] = useCollectionData(query, {idField: 'id'});
 
+  if (!users) {
+    return (
+      <div className="UserList">
+        <p>Retrieving users...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="UserList">
       {
