@@ -9,6 +9,8 @@ import SignUp from '../SignUp/SignUp.js';
 import Profile from '../Profile/Profile.js';
 import UserList from '../UserList/UserList.js';
 import Settings from '../Settings/Settings.js';
+import About from '../About/About.js';
+import Friends from '../Friends/Friends.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -92,6 +94,14 @@ function Page() {
           <Redirect to="/signin" />
         }
         </Route>
+        {/* friends page */}
+        <Route path="/friends">
+        {
+          firebase.auth().currentUser ?
+          <Friends /> :
+          <Redirect to="/signin" />
+        }
+        </Route>
         {/* settings page */}
         <Route path="/settings">
         {
@@ -99,6 +109,10 @@ function Page() {
           <Settings /> :
           <Redirect to="/signin" />
         }
+        </Route>
+        {/* about page */}
+        <Route path="/about">
+          <About />
         </Route>
         {/* username page */}
         <Route path="/:username">

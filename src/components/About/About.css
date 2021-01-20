@@ -1,0 +1,20 @@
+.About {
+  /* width: 700px; */
+}
+
+.About h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.About .top-hr {
+  margin: 0 0 15px 0;
+  border: 0.5px solid #cfcfcf;
+  width: 80%;
+}
+
+.About .bottom-hr {
+  margin: 10px 0 10px 0;
+  border: 0.5px solid #cfcfcf;
+  width: 80%;
+}

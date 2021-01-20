@@ -43,6 +43,12 @@ function Navbar() {
             {
               firebase.auth().currentUser &&
               <li className="nav-item">
+                <Link to="/friends" className="link">Friends</Link>
+              </li>
+            }
+            {
+              firebase.auth().currentUser &&
+              <li className="nav-item">
                 <Link to="/settings" className="link">Settings</Link>
               </li>
             }
@@ -56,6 +62,11 @@ function Navbar() {
               !firebase.auth().currentUser &&
               <li className="nav-item">
                 <Link to="/signup" className="link">Sign up</Link>
+              </li>
+            }
+            {
+              <li className="nav-item">
+                <Link to="/about" className="link">About</Link>
               </li>
             }
             {/* Search User */}
@@ -81,8 +92,8 @@ function Navbar() {
                 <button className="sign-out-button" onClick={signOut}>Sign Out</button>
               </li>
             }
-            </ul>
-          </div>
+          </ul>
+        </div>
       </nav>
     </div>
   );
