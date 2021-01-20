@@ -64,6 +64,8 @@ function SignUp() {
       <form onSubmit={signUp} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>
+        <p className="tagline">A minimalist social media placing its users first.</p>
+        <hr />
         {/* Email */}
         <label htmlFor="emailInput">Email</label>
         <input
@@ -106,6 +108,7 @@ function SignUp() {
         />
         {/* Button */}
         <button type="submit">Sign Up</button>
+        <hr />
         {/* Sign in */}
         <Link to="/signin" className="link">Already have an account? Sign in</Link>
         {/* Error */}

@@ -35,6 +35,8 @@ function SignIn() {
       <form onSubmit={signIn} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>
+        <p className="tagline">A minimalist social media placing its users first.</p>
+        <hr />
         {/* Email */}
         <label htmlFor="emailInput">Email</label>
         <input
@@ -57,6 +59,7 @@ function SignIn() {
         />
         {/* Button */}
         <button type="submit">Sign In</button>
+        <hr />
         {/* Sign up */}
         <Link to="/signup" className="link">No account? Sign up</Link>
         {/* Error */}

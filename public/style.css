@@ -1,15 +1,10 @@
 * {
   font-family: 'Roboto', sans-serif;
-  /* font-family: 'Lato', sans-serif; */
 }
 
 button {
   cursor: pointer;
 }
-
-/* .flex-fill {
-  flex-grow: 1;
-} */
 
 .flex-col {
   display: flex;
@@ -50,7 +45,7 @@ button {
   margin: 5px 0;
 }
 
-.Form h1, .Form input {
+.Form input {
   margin-bottom: 10px;
 }
 
@@ -59,5 +54,17 @@ button {
 }
 
 .Form h1 {
+  margin: 0;
   font-size: 42px;
+}
+
+.Form .tagline {
+  text-align: center;
+  margin: 2px 0 0 0;
+}
+
+.Form hr {
+  margin: 10px 0;
+  border: 1px solid #cfcfcf;
+  width: 80%;
 }

@@ -5,8 +5,8 @@ import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firesto
 
 import Post from '../Post/Post.js';
 
-const maxPostLength = 64;
-const maxPosts = 64;
+const maxPostLength = 128;
+const maxPosts = 128;
 
 // PostList component
 function PostList(props) {
@@ -23,7 +23,9 @@ function PostList(props) {
   .orderBy('createdAt', 'desc');
   const [posts] = useCollectionData(postsQuery, {idField: 'id'});
   // get user doc from current uid for friends
-  const userDocRef = firebase.firestore().collection('users').doc(currentUid);
+  const userDocRef = currentUid ?
+  firebase.firestore().collection('users').doc(currentUid) :
+  undefined;
   const [userDoc] = useDocumentData(userDocRef);
 
   // makes post with current content
@@ -31,12 +33,13 @@ function PostList(props) {
   async function makePost(e) {
     e.preventDefault();
     // check content length
-    if (content.length > 64) {
-      alert('Content cannot be longer than 64 characters.');
+    if (content.length > maxPostLength) {
+      alert(`Content cannot be longer than ${maxPostLength} characters.`);
       return;
     }
+    // check post count
     if (posts.length >= maxPosts) {
-      alert('Too many posts.');
+      alert('Too many posts. Please delete some.');
       return;
     }
     // add post to collection
@@ -104,7 +107,7 @@ function PostList(props) {
             />
             {/* Button */}
             <button type="submit" className="post-button">Post</button>
-            <p className="post-length">{content.length}/{maxPostLength} chars | {posts ? posts.length : 0}/{maxPosts} posts</p>
+            <p className="post-length">{content.length}/{maxPostLength} chars</p>
           </form>
         </div>
       }
