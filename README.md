@@ -1,6 +1,6 @@
 # Bicycle
 
-Work in progress.
+A minimalist social media. Coming soon.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
