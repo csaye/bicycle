@@ -6,19 +6,20 @@ import { usernameTaken } from '../../util/usernameData.js';
 function Settings() {
   let [displayName, setDisplayName] = useState('');
   let [username, setUsername] = useState('');
+  let [profilePicture, setProfilePicture] = useState(undefined);
 
   let [error, setError] = useState('');
   let [deleting, setDeleting] = useState(false);
 
   async function changeDisplayName(e) {
     e.preventDefault();
+    setError('');
     setDeleting(false);
     // verify display name length
     if (displayName.length < 1 || displayName.length > 32) {
       setError("Display name must be between 1 and 32 characters.");
     // if display name valid
     } else {
-      setError('');
       // set user doc
       const uid = firebase.auth().currentUser.uid;
       await firebase.firestore().collection('users').doc(uid).update({
@@ -30,6 +31,7 @@ function Settings() {
 
   async function changeUsername(e) {
     e.preventDefault();
+    setError('');
     setDeleting(false);
     // verify username chars
     if (!/^([A-Za-z0-9_]{0,})$/.test(username)) {
@@ -42,13 +44,26 @@ function Settings() {
       setError("Username taken. Please try another.");
     // if username valid
     } else {
-      setError('');
       // set user doc
       const uid = firebase.auth().currentUser.uid;
       await firebase.firestore().collection('users').doc(uid).update({
         username: username
       });
       window.location.href = "/";
+    }
+  }
+
+  async function changeProfilePicture(e) {
+    e.preventDefault();
+    setError('');
+    setDeleting(false);
+    // return if no profile picture
+    if (!profilePicture) {
+      setError("Please upload a profile picture.");
+    } else {
+      const uid = firebase.auth().currentUser.uid;
+      const storageRef = firebase.storage().ref(uid + '/profilePicture/' + profilePicture.name);
+      await storageRef.put(profilePicture).catch(e => setError("Invalid file. Please use an image with size under 5MB."));
     }
   }
 
@@ -104,7 +119,6 @@ function Settings() {
         onChange={e => setDisplayName(e.target.value)}
         required
         />
-        {/* Button */}
         <button type="submit">Change display name</button>
       </form>
       {/* Username */}
@@ -118,10 +132,19 @@ function Settings() {
         onChange={e => setUsername(e.target.value)}
         required
         />
-        {/* Button */}
         <button type="submit">Change username</button>
       </form>
-      <p>Change profile picture</p>
+      {/* Profile Picture */}
+      <form onSubmit={changeProfilePicture}>
+        <input
+        type="file"
+        accept="image/*"
+        className="file-input"
+        onChange={e => setProfilePicture(e.target.files[0])}
+        />
+        <button type="submit">Change profile picture</button>
+      </form>
+      {/* Delete Account */}
       <button onClick={startDelete}>Delete account</button>
       {/* Error */}
       { error && <p className="text-danger text-center">{error}</p> }

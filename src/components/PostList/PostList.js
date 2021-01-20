@@ -63,7 +63,7 @@ function PostList(props) {
             />
             {/* Button */}
             <button type="submit" className="post-button">Post</button>
-            <p className="post-length">{content.length}/{maxPostLength}</p>
+            <p className="post-length">{content.length}/{maxPostLength} | {posts ? posts.length : 0}/{maxPosts}</p>
           </form>
         </div>
       }

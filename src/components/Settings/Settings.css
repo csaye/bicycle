@@ -5,3 +5,13 @@
 .Settings .cancel-button {
   margin-left: 5px;
 }
+
+.Settings .file-input {
+  width: 240px;
+  border: 1px solid #999;
+  overflow: hidden;
+}
+
+.Settings button {
+  margin: 15px 0;
+}
