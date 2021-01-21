@@ -58,7 +58,8 @@ function SignUp() {
       username: username,
       displayName: displayName,
       registered: new Date(),
-      friends: []
+      friends: [],
+      status: ''
     });
     // go to home page
     window.location.href = '/';

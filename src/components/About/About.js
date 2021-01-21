@@ -33,7 +33,7 @@ function About() {
       data collection, targeted advertisements, and number-focused engagement —
       and provide a way for people to just share their thoughts and connect.
       </p>
-      <img src={logo} />
+      <img src={logo} alt="logo" />
       <p>Thank you for using Bicycle.</p>
       <hr />
       {/* GitHub */}

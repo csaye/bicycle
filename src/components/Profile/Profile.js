@@ -15,6 +15,7 @@ function Profile() {
   // get user data from username
   let [displayName, setDisplayName] = useState(undefined);
   let [profileURL, setProfileURL] = useState(undefined);
+  let [status, setStatus] = useState('');
   let [uid, setUid] = useState(undefined);
   async function getUserData() {
     // get snapshot
@@ -36,18 +37,30 @@ function Profile() {
         .then(pURL => setProfileURL(pURL))
         .catch(e => console.log(e));
       }
-      // set display name and uid
-      setDisplayName(snapshot.docs[0].data().displayName);
+      // set status, display name, and uid
+      const data = snapshot.docs[0].data();
+      setStatus(data.status);
+      setDisplayName(data.displayName);
       setUid(uid);
     }
   }
 
-  // get user data when auth state changed
+  // get user data on start
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(() => {
-      getUserData();
+    getUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  let [statusUpdated, setStatusUpdated] = useState(false);
+
+  async function updateStatus() {
+    setStatusUpdated(false);
+    await firebase.firestore().collection('users').doc(uid).update({
+      status: status
     });
-  });
+    // set status updated
+    setStatusUpdated(true);
+  }
 
   // if invalid data, wait
   if (!uid || !displayName) {
@@ -61,9 +74,42 @@ function Profile() {
   // if valid data, show profile
   return (
     <div className="Profile">
-      <img className="profile-picture" src={profileURL ? profileURL : defaultProfile} alt="profile pic" />
+      <img
+      className="profile-picture"
+      src={profileURL ? profileURL : defaultProfile}
+      alt="profile pic"
+      />
       <p className="profile-title">{displayName}</p>
-      <h3><Link to={`/${username}`} className="profile-subtitle">@{username}</Link></h3>
+      <Link to={`/${username}`} className="profile-subtitle">@{username}</Link>
+      {
+          // status input if own user page
+          firebase.auth().currentUser?.uid === uid ?
+          <div>
+            <input
+            value={status}
+            type="text"
+            className="status-input"
+            placeholder="status"
+            onChange={e => setStatus(e.target.value)}
+            maxLength="64"
+            />
+            <button onClick={updateStatus}>
+            Update status
+            </button>
+            {
+              statusUpdated &&
+              <p className="status-updated text-success">Status updated successfully</p>
+            }
+          </div> :
+          // status text if not own user page
+          <div>
+            {
+              status &&
+              <h5 className="status-text font-italic">{status}</h5>
+            }
+          </div>
+      }
+      <hr />
       <PostList uid={uid} displayName={displayName} username={username} />
     </div>
   )
