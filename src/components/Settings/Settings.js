@@ -160,7 +160,7 @@ function Settings() {
   }
 
   return (
-    <div className="Settings Form shadowed flex-col">
+    <div className="Settings Form hover-shadow flex-col">
       {/* Title */}
       <h1>Settings</h1>
       <hr />

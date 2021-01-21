@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 
@@ -8,6 +8,11 @@ function SignIn() {
   let [password, setPassword] = useState('');
 
   let [error, setError] = useState(undefined);
+
+  // select email field on start
+  useEffect(() => {
+    document.getElementById('emailInput').focus();
+  }, []);
 
   async function signIn(e) {
     e.preventDefault();
@@ -31,7 +36,7 @@ function SignIn() {
   }
 
   return (
-    <div className="SignIn Form shadowed">
+    <div className="SignIn Form hover-shadow">
       <form onSubmit={signIn} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>

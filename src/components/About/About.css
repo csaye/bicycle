@@ -1,4 +1,12 @@
+.About {
+  width: 540px;
+}
+
 .About h2 {
   margin: 0;
   font-size: 22px;
+}
+
+.About img {
+  width: 60px;
 }

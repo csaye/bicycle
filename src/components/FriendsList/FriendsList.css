@@ -4,6 +4,9 @@
 .FriendsList .User {
   width: 180px;
 }
+.FriendsList .friend-button {
+  margin: 5px 10px;
+}
 
 .FriendsList .friends-posts {
   display: flex;

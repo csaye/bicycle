@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 
@@ -12,6 +12,11 @@ function SignUp() {
   let [username, setUsername] = useState('');
 
   let [error, setError] = useState('');
+
+  // select email field on start
+  useEffect(() => {
+    document.getElementById('emailInput').focus();
+  }, []);
 
   async function signUp(e) {
     e.preventDefault();
@@ -60,7 +65,7 @@ function SignUp() {
   }
 
   return (
-    <div className="SignUp Form shadowed">
+    <div className="SignUp Form hover-shadow">
       <form onSubmit={signUp} className="flex-col">
         {/* Title */}
         <h1>Bicycle</h1>

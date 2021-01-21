@@ -1,9 +1,24 @@
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* height: 100%; */
+  background-image: linear-gradient(to right, #ffffff, #f8f8f8)!important;
+}
+
+/* .open-sans {
+  font-family: 'Open Sans', sans-serif;
+} */
 
 button {
   cursor: pointer;
+}
+
+button, input, textarea {
+  border-radius: 5px!important;
 }
 
 .flex-col {
@@ -24,7 +39,7 @@ button {
   transition: box-shadow 0.25s ease-in-out;
 }
 .hover-shadow:hover {
-  box-shadow: 0 2px 15px #999;
+  box-shadow: 0 2px 12px #999;
 }
 
 /* Form */
@@ -35,7 +50,12 @@ button {
   margin: 50px auto;
   padding: 20px;
   border-radius: 20px;
+  /* transition: 0.25s ease-in-out; */
 }
+
+/* .Form:hover {
+  transform: scale(1.01);
+} */
 
 .Form form {
   height: 100%;
@@ -56,6 +76,7 @@ button {
 .Form h1 {
   margin: 0;
   font-size: 42px;
+  font-weight: bold;
 }
 
 .Form .tagline {
