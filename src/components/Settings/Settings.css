@@ -1,5 +1,10 @@
+.Settings {
+  width: 540px;
+}
+
 .Settings input {
   margin: 0 5px;
+  width: 180px;
 }
 
 .Settings .cancel-button {

@@ -2,6 +2,10 @@
   margin: 14px 0 0 10px;
 }
 
+.PostList form textarea {
+  resize: none;
+}
+
 .PostList .friend-button {
   margin: 5px 0 10px 10px;
 }
@@ -16,11 +20,12 @@
 }
 
 .PostList .post-button {
-  margin: 0 5px;
+  margin: 0 5px 10px 0;
 }
 
 .PostList .post-length {
   display: inline-block;
+  margin: 0;
 }
 
 .PostList .post-list {

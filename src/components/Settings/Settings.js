@@ -1,5 +1,5 @@
 import './Settings.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 // import FieldValue from 'firebase/app';
 import { usernameTaken } from '../../util/usernameData.js';
@@ -12,6 +12,19 @@ function Settings() {
   let [error, setError] = useState('');
   let [deleting, setDeleting] = useState(false);
   let [password, setPassword] = useState('');
+
+  async function getUserData() {
+    // set username and display name
+    const uid = firebase.auth().currentUser.uid;
+    const userData = await firebase.firestore().collection('users').doc(uid).get();
+    setUsername(userData.data()?.username);
+    setDisplayName(userData.data()?.displayName);
+  }
+
+  // get user data on start
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   async function changeDisplayName(e) {
     e.preventDefault();
@@ -206,9 +219,9 @@ function Settings() {
             onChange={e => setPassword(e.target.value)}
             required
             />
-            <button type="submit">Yes, delete account</button>
+            <button type="submit">Yes, delete my account</button>
           </form>
-          <button onClick={cancelDelete} className="cancel-button">Cancel, do not delete account</button>
+          <button onClick={cancelDelete} className="cancel-button">No, do not delete my account</button>
         </div>
       }
     </div>

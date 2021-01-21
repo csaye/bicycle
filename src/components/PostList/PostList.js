@@ -97,17 +97,20 @@ function PostList(props) {
         <div>
           <form onSubmit={makePost}>
             {/* Content */}
-            <input
+            <textarea
             value={content}
             type="text"
             placeholder="content"
             onChange={e => setContent(e.target.value)}
             maxLength={maxPostLength}
+            rows="4"
             required
             />
-            {/* Button */}
-            <button type="submit" className="post-button">Post</button>
-            <p className="post-length">{content.length}/{maxPostLength} chars</p>
+            {/* Post button and post length */}
+            <div>
+              <button type="submit" className="post-button">Post</button>
+              <p className="post-length">{content.length}/{maxPostLength} chars</p>
+            </div>
           </form>
         </div>
       }

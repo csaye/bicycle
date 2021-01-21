@@ -15,6 +15,10 @@
   margin: auto 0;
 }
 
+.navbar-nav input {
+  width: 160px;
+}
+
 /* Top */
 @media (min-width: 992px) {
   .Navbar .link {
