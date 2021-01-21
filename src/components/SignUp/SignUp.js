@@ -20,6 +20,7 @@ function SignUp() {
 
   async function signUp(e) {
     e.preventDefault();
+    setError('');
     // verify display name length
     if (displayName.length < 1 || displayName.length > 32) {
       setError("Display name must be between 1 and 32 characters.");
@@ -56,6 +57,7 @@ function SignUp() {
     const uid = firebase.auth().currentUser.uid;
     await firebase.firestore().collection('users').doc(uid).set({
       username: username,
+      usernameLower: username.toLowerCase(),
       displayName: displayName,
       registered: new Date(),
       friends: [],

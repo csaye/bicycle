@@ -115,7 +115,7 @@ function Page() {
           <About />
         </Route>
         {/* username page */}
-        <Route path="/:username">
+        <Route path="/:urlUsername">
           <Profile />
         </Route>
         {/* no page */}

@@ -61,7 +61,8 @@ function Settings() {
       // set user doc
       const uid = firebase.auth().currentUser.uid;
       await firebase.firestore().collection('users').doc(uid).update({
-        username: username
+        username: username,
+        usernameLower: username.toLowerCase()
       });
       window.location.href = "/";
     }

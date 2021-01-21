@@ -10,12 +10,13 @@ import PostList from '../PostList/PostList.js';
 // Profile component
 function Profile() {
   // get username from url
-  const { username } = useParams();
+  const { urlUsername } = useParams();
 
   let [displayName, setDisplayName] = useState(undefined);
   let [profileURL, setProfileURL] = useState(undefined);
   let [status, setStatus] = useState('');
   let [uid, setUid] = useState(undefined);
+  let [username, setUsername] = useState(undefined);
 
   let [loading, setLoading] = useState(true);
 
@@ -24,7 +25,7 @@ function Profile() {
     // get snapshot
     const usersRef = firebase.firestore().collection('users');
     const snapshot = await usersRef
-    .where('username', '==', username)
+    .where('usernameLower', '==', urlUsername.toLowerCase())
     .limit(1)
     .get();
     // if user found, set data
@@ -40,9 +41,10 @@ function Profile() {
         .then(pURL => setProfileURL(pURL))
         .catch(e => console.log(e));
       }
-      // set status, display name, and uid
+      // set status, username, display name, and uid
       const data = snapshot.docs[0].data();
       setStatus(data.status);
+      setUsername(data.username);
       setDisplayName(data.displayName);
       setUid(uid);
     }
@@ -77,7 +79,7 @@ function Profile() {
   }
 
   // if invalid data, could not find user
-  if (!uid || !displayName) {
+  if (!uid || !displayName || !username) {
     return (
       <div className="Profile">
         <p>Could not find this user. Make sure the username is correct.</p>
