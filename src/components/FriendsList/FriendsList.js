@@ -14,8 +14,7 @@ function FriendsList(props) {
   const usersRef = firebase.firestore().collection('users');
   const query = userDoc.friends.length > 0 ?
   usersRef.where("__name__", "in", userDoc.friends) :
-  usersRef.where("__name__", "==", 'none');
-  // query.addSort("username");
+  usersRef.where("__name__", "==", 'null');
   const [friends] = useCollectionData(query, {idField: 'id'});
 
   if (!friends) {
@@ -24,19 +23,25 @@ function FriendsList(props) {
     )
   }
 
+  // sort friends by username
+  let sortedFriends = friends.slice();
+  sortedFriends.sort((a, b) => {
+      return a.username >= b.username;
+  });
+
   return (
     <div className="FriendsList">
       <div className="friends-users">
         {
-          friends?.length > 0 ?
-          friends.map(u => <User key={u.id} data={u} />) :
+          sortedFriends?.length > 0 ?
+          sortedFriends.map(u => <User key={u.id} data={u} />) :
           <p>No friends yet. Better invite some!</p>
         }
       </div>
       <div className="friends-posts">
         {
-          friends?.length > 0 &&
-          friends.map(u => <PostList key={u.id} uid={u.id} displayName={u.displayName} username={u.username} />)
+          sortedFriends?.length > 0 &&
+          sortedFriends.map(u => <PostList key={u.id} uid={u.id} displayName={u.displayName} username={u.username} />)
         }
       </div>
     </div>

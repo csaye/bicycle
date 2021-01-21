@@ -12,11 +12,14 @@ function Profile() {
   // get username from url
   const { username } = useParams();
 
-  // get user data from username
   let [displayName, setDisplayName] = useState(undefined);
   let [profileURL, setProfileURL] = useState(undefined);
   let [status, setStatus] = useState('');
   let [uid, setUid] = useState(undefined);
+
+  let [loading, setLoading] = useState(true);
+
+  // get user data from username
   async function getUserData() {
     // get snapshot
     const usersRef = firebase.firestore().collection('users');
@@ -43,6 +46,8 @@ function Profile() {
       setDisplayName(data.displayName);
       setUid(uid);
     }
+    // stop loading
+    setLoading(false);
   }
 
   // get user data on start
@@ -62,11 +67,20 @@ function Profile() {
     setStatusUpdated(true);
   }
 
-  // if invalid data, wait
+  // if loading, wait
+  if (loading) {
+    return (
+      <div className="Profile">
+        <p>Retrieving profile...</p>
+      </div>
+    );
+  }
+
+  // if invalid data, could not find user
   if (!uid || !displayName) {
     return (
       <div className="Profile">
-        <p>Could not find this user</p>
+        <p>Could not find this user. Make sure the username is correct.</p>
       </div>
     );
   }

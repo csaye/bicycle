@@ -1,7 +1,6 @@
 import './Settings.css';
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
-// import FieldValue from 'firebase/app';
 import { usernameTaken } from '../../util/usernameData.js';
 
 function Settings() {
@@ -119,14 +118,14 @@ function Settings() {
     const uid = firebase.auth().currentUser.uid;
     await firebase.firestore().collection('users').doc(uid).delete();
 
-    // // delete user as friend
+    // delete user as friend
     // await firebase.firestore().collection('users')
-    // .where(uid, 'in', 'friends').get()
+    // .where('friends', 'array-contains', uid).get()
     // .then((snapshot) => {
     //   // remove friend for all docs
     //   snapshot.forEach((doc) => {
     //     doc.ref.update({
-    //       friends: FieldValue.arrayRemove(uid)
+    //       friends: firebase.firestore.FieldValue.arrayRemove(uid)
     //     })
     //   });
     // });

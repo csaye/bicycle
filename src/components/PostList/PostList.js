@@ -67,18 +67,17 @@ function PostList(props) {
     // return if removing friend and friends does not includes poster
     if (!addingFriend && !friendsList.includes(postUid)) return;
 
-    // slice and update new friends list
-    const newFriendsList = friendsList.slice();
+    // add post uid
     if (addingFriend) {
-      newFriendsList.push(postUid);
+      await docRef.update({
+        friends: firebase.firestore.FieldValue.arrayUnion(postUid)
+      });
+    // remove post uid
     } else {
-      newFriendsList.splice(newFriendsList.indexOf(postUid), 1);
+      await docRef.update({
+        friends: firebase.firestore.FieldValue.arrayRemove(postUid)
+      });
     }
-
-    // update friends list
-    await docRef.update({
-      friends: newFriendsList
-    });
   }
 
   if (!posts) {
