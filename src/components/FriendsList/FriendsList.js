@@ -26,7 +26,9 @@ function FriendsList(props) {
   // sort friends by username
   let sortedFriends = friends.slice();
   sortedFriends.sort((a, b) => {
-      return a.username >= b.username;
+      if (a.usernameLower < b.usernameLower) return -1;
+      if (a.usernameLower > b.usernameLower) return 1;
+      return 0;
   });
 
   return (

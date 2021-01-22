@@ -1,5 +1,6 @@
 .FriendsList .friends-users {
   display: flex;
+  flex-wrap: wrap;
 }
 .FriendsList .User {
   width: 180px;
@@ -10,9 +11,13 @@
 
 .FriendsList .friends-posts {
   display: flex;
+  flex-wrap: wrap;
 }
 .FriendsList .PostList {
   width: 200px;
+}
+.FriendsList .PostList .friend-button {
+  width: 180px;
 }
 .FriendsList .PostList .Post {
   width: 180px;

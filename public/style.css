@@ -5,13 +5,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  /* height: 100%; */
   background-image: linear-gradient(to right, #ffffff, #f8f8f8)!important;
 }
-
-/* .open-sans {
-  font-family: 'Open Sans', sans-serif;
-} */
 
 button {
   cursor: pointer;
@@ -50,12 +45,7 @@ button, input, textarea {
   margin: 50px auto;
   padding: 20px;
   border-radius: 20px;
-  /* transition: 0.25s ease-in-out; */
 }
-
-/* .Form:hover {
-  transform: scale(1.01);
-} */
 
 .Form form {
   height: 100%;

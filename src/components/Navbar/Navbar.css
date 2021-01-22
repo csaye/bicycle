@@ -7,8 +7,8 @@
   height: 50px;
 }
 
-.navbar-nav li a, .navbar-nav li button, .navbar-nav li input, .navbar-nav li p {
-    float: right;
+.navbar-nav li a, .navbar-nav li button, .navbar-nav li input {
+  float: right;
 }
 
 .navbar-nav .nav-item {
