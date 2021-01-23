@@ -5,6 +5,9 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import Message from '../Message/Message.js';
 
+const maxMessageLength = 1024;
+const messageLimit = 32;
+
 function Messages() {
   // get uid
   const uid = firebase.auth().currentUser.uid;
@@ -37,7 +40,8 @@ function Messages() {
   const messagesRef = firebase.firestore().collection('messages');
   const messagesQuery = messagesRef
   .where('uids', '==', uids.sort())
-  .orderBy('createdAt', 'desc');
+  .orderBy('createdAt', 'desc')
+  .limit(messageLimit);
   const [messages] = useCollectionData(messagesQuery, {idField: 'id'});
 
   const [content, setContent] = useState('');
@@ -98,7 +102,7 @@ function Messages() {
                 type="text"
                 placeholder="content"
                 onChange={e => setContent(e.target.value)}
-                maxLength="1024"
+                maxLength={maxMessageLength}
                 rows="4"
                 required
                 />

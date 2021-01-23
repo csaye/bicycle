@@ -144,6 +144,19 @@ function Settings() {
       batch.commit();
     });
 
+    // delete user messages
+    await firebase.firestore().collection('messages').where('uids', 'array-contains', uid).get()
+    .then((snapshot) => {
+      // create batch
+      const batch = firebase.firestore().batch();
+      // batch all deletions
+      snapshot.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+      // commit batch
+      batch.commit();
+    });
+
     // if profile pic exists
     const listResult = await firebase.storage().ref(uid + '/profilePicture').listAll();
     if (listResult.items.length > 0) {

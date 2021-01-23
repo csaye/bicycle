@@ -9,8 +9,14 @@
   background-color: #209cee;
 }
 
-.Message p {
+.Message h6 {
+  /* font-size: 12px; */
   margin: 0;
+  color: #555;
+}
+
+.Message p {
+  margin: 5px 0;
 }
 
 .Message .delete-button {

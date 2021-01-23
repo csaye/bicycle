@@ -2,7 +2,7 @@ import './Message.css';
 import firebase from 'firebase/app';
 
 function Message(props) {
-  const { id, content, senderUid } = props.data;
+  const { id, content, senderUid, createdAt } = props.data;
 
   // get uid
   const uid = firebase.auth().currentUser.uid;
@@ -18,6 +18,7 @@ function Message(props) {
       "Message hover-shadow sent-message" :
       "Message hover-shadow received-message"
     }>
+      <h6>{createdAt.toDate().toDateString()} {createdAt.toDate().toLocaleTimeString()}</h6>
       <p>{content}</p>
       {
         // if own message, show delete button
