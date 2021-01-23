@@ -15,7 +15,10 @@ function Messages() {
   const [friendName, setFriendName] = useState('');
   const [friendsQuery, setFriendsQuery] = useState(undefined);
 
-  const uids = [uid, friendUid];
+  const [loadingMessages, setLoadingMessages] = useState(false);
+
+  // sort uids for easier lookup
+  const uids = [uid, friendUid].sort();
 
   // get mutual friends of current user
   async function getFriendsQuery() {
@@ -30,6 +33,15 @@ function Messages() {
     setFriendsQuery(query);
   }
   const [friends] = useCollectionData(friendsQuery, {idField: 'id'});
+  // sort friends by username if friends
+  let sortedFriends = friends?.slice();
+  if (sortedFriends) {
+    sortedFriends.sort((a, b) => {
+      if (a.usernameLower < b.usernameLower) return -1;
+      if (a.usernameLower > b.usernameLower) return 1;
+      return 0;
+    });
+  }
 
   useEffect(() => {
     getFriendsQuery();
@@ -39,10 +51,15 @@ function Messages() {
   // get messages from uid
   const messagesRef = firebase.firestore().collection('messages');
   const messagesQuery = messagesRef
-  .where('uids', '==', uids.sort())
+  .where('uids', '==', uids)
   .orderBy('createdAt', 'desc')
   .limit(messageLimit);
   const [messages] = useCollectionData(messagesQuery, {idField: 'id'});
+
+  // stop loading messages after undefined registers
+  useEffect(() => {
+    if (!messages) setLoadingMessages(false);
+  }, [messages]);
 
   const [content, setContent] = useState('');
 
@@ -63,20 +80,23 @@ function Messages() {
     <div className="Messages">
       {/* friends list */}
       {
-        friends ?
+        sortedFriends ?
         <div className="friends-list">
           {
-            friends.length > 0 &&
+            sortedFriends.length > 0 &&
             <p className="text-center">Mutual friends</p>
           }
           {
-            friends.length > 0 ?
-            friends.map(f =>
+            sortedFriends.length > 0 ?
+            sortedFriends.map(f =>
               <button key={f.id} onClick={() => {
+                // start loading messages
+                setLoadingMessages(true);
+                // update friend uid and name
                 setFriendUid(f.id);
-                setFriendName(f.displayName);
+                setFriendName(f.username);
               }}>
-                {f.displayName}
+                {f.username}
               </button>
             ) :
             <p>No mutual friends yet</p>
@@ -88,15 +108,17 @@ function Messages() {
       }
       {/* message list */}
       {
-        messages ?
+        // if messages and not loading messages
+        (messages && !loadingMessages) ?
         <div>
           {
+            // if friend uid valid
             friendUid ?
             <div className="message-list">
               {/* send message */}
               <form onSubmit={sendMessage}>
                 <p className="messaging-with">Messaging with {friendName}</p>
-                {/* Content */}
+                {/* content */}
                 <textarea
                 value={content}
                 type="text"
@@ -115,9 +137,11 @@ function Messages() {
                 <p>No messages yet</p>
               }
             </div> :
+            // if friend uid not valid
             <p className="pick-text">Pick a mutual friend to message with.</p>
           }
         </div> :
+        // if not messages or loading messages
         <p className="pick-text">Retrieving messages...</p>
       }
     </div>
