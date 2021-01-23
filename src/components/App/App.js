@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile.js';
 import Settings from '../Settings/Settings.js';
 import About from '../About/About.js';
 import Friends from '../Friends/Friends.js';
+import Messages from '../Messages/Messages.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -90,6 +91,14 @@ function Page() {
         {
           firebase.auth().currentUser ?
           <Friends /> :
+          <Redirect to="/signin" />
+        }
+        </Route>
+        {/* messages page */}
+        <Route path="/messages">
+        {
+          firebase.auth().currentUser ?
+          <Messages /> :
           <Redirect to="/signin" />
         }
         </Route>
