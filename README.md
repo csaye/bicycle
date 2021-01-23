@@ -1,6 +1,8 @@
 # Bicycle
 
-A minimalist social media. Coming soon.
+A minimalist social media placing its users first. Post thoughts, connect with friends, and keep it simple on Bicycle.
+
+Try it here: [bicycle.social](https://bicycle.social)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
