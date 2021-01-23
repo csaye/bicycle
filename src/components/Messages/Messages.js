@@ -1,5 +1,5 @@
 import './Messages.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
@@ -8,14 +8,35 @@ import Message from '../Message/Message.js';
 function Messages() {
   // get uid
   const uid = firebase.auth().currentUser.uid;
-  const [friendUid, setFriendUid] = useState('friend-uid');
+  const [friendUid, setFriendUid] = useState('');
+  const [friendName, setFriendName] = useState('');
+  const [friendsQuery, setFriendsQuery] = useState(undefined);
 
   const uids = [uid, friendUid];
+
+  // get mutual friends of current user
+  async function getFriendsQuery() {
+    const usersRef = firebase.firestore().collection('users');
+    const userData = await usersRef.doc(uid).get();
+    // get query based on friends
+    const query = userData.data().friends.length > 0 ?
+    usersRef
+    .where("__name__", "in", userData.data().friends)
+    .where("friends", "array-contains", uid) :
+    usersRef.where("__name__", "==", 'null');
+    setFriendsQuery(query);
+  }
+  const [friends] = useCollectionData(friendsQuery, {idField: 'id'});
+
+  useEffect(() => {
+    getFriendsQuery();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // get messages from uid
   const messagesRef = firebase.firestore().collection('messages');
   const messagesQuery = messagesRef
-  .where('uids', '==', uids)
+  .where('uids', '==', uids.sort())
   .orderBy('createdAt', 'desc');
   const [messages] = useCollectionData(messagesQuery, {idField: 'id'});
 
@@ -34,45 +55,67 @@ function Messages() {
     });
   }
 
-  if (!messages) {
-    return (
-      <div className="Messages">
-        <p>Retrieving messages...</p>
-      </div>
-    );
-  }
-
   return (
     <div className="Messages">
       {/* friends list */}
-      <div className="friends-list">
       {
-        // friends.map(f => )
+        friends ?
+        <div className="friends-list">
+          {
+            friends.length > 0 &&
+            <p className="text-center">Mutual friends</p>
+          }
+          {
+            friends.length > 0 ?
+            friends.map(f =>
+              <button key={f.id} onClick={() => {
+                setFriendUid(f.id);
+                setFriendName(f.displayName);
+              }}>
+                {f.displayName}
+              </button>
+            ) :
+            <p>No mutual friends yet</p>
+          }
+        </div> :
+        <div className="friends-list">
+          <p>Retrieving friends...</p>
+        </div>
       }
-      </div>
       {/* message list */}
-      <div className="message-list">
       {
-        messages.length > 0 ?
-        messages.map(m => <Message key={m.id} data={m} />) :
-        <p>No messages yet</p>
+        messages ?
+        <div>
+          {
+            friendUid ?
+            <div className="message-list">
+              {/* send message */}
+              <form onSubmit={sendMessage}>
+                <p className="messaging-with">Messaging with {friendName}</p>
+                {/* Content */}
+                <textarea
+                value={content}
+                type="text"
+                placeholder="content"
+                onChange={e => setContent(e.target.value)}
+                maxLength="1024"
+                rows="4"
+                required
+                />
+                {/* send button */}
+                <button type="submit" className="send-button">Send</button>
+              </form>
+              {
+                messages.length > 0 ?
+                messages.map(m => <Message key={m.id} data={m} />) :
+                <p>No messages yet</p>
+              }
+            </div> :
+            <p className="pick-text">Pick a mutual friend to message with.</p>
+          }
+        </div> :
+        <p className="pick-text">Retrieving messages...</p>
       }
-      </div>
-      {/* send message */}
-      <form onSubmit={sendMessage}>
-        {/* Content */}
-        <textarea
-        value={content}
-        type="text"
-        placeholder="content"
-        onChange={e => setContent(e.target.value)}
-        maxLength="1024"
-        rows="4"
-        required
-        />
-        {/* send button */}
-        <button type="submit" className="send-button">Send</button>
-      </form>
     </div>
   );
 }

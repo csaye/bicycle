@@ -10,7 +10,7 @@ function FriendsList(props) {
   // get user doc from props
   const userDoc = props.userDoc;
 
-  // get friends ordered by username
+  // get friends
   const usersRef = firebase.firestore().collection('users');
   const query = userDoc.friends.length > 0 ?
   usersRef.where("__name__", "in", userDoc.friends) :

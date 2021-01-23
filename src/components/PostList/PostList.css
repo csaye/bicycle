@@ -3,7 +3,7 @@
 }
 
 .PostList form textarea {
-  resize: none;
+  width: 250px;
 }
 
 .PostList .friend-button {

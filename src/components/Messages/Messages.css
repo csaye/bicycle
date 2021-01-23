@@ -1,4 +1,46 @@
 .Messages {
-  margin: 10px;
   display: flex;
+}
+
+/* friends list */
+
+.Messages .friends-list {
+  background-color: #999;
+  position: fixed;
+  height: 100%;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.Messages .friends-list p {
+  margin: 0;
+}
+.Messages .friends-list button {
+  margin: 2px 0;
+}
+
+/* message list */
+
+.Messages .pick-text {
+  margin: 10px 10px 10px 210px;
+}
+
+.Messages .message-list {
+  margin: 20px 20px 20px 220px;
+  width: 250px;
+}
+
+.Messages .message-list .messaging-with {
+  margin-bottom: 10px;
+}
+
+.Messages .message-list textarea {
+  width: 100%;
+}
+
+.Messages .message-list .send-button {
+  display: block;
+  margin-bottom: 20px;
 }
