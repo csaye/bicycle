@@ -1,0 +1,22 @@
+.Message {
+  background-color: #efefef;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.sent-message {
+  background-color: #209cee;
+}
+
+.Message p {
+  margin: 0;
+}
+
+.Message .delete-button {
+  height: 25px;
+  width: 25px;
+  padding: 0;
+  padding-bottom: 3px;
+  font-size: 16px;
+}

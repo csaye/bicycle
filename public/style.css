@@ -31,7 +31,7 @@ button, input, textarea {
 
 .hover-shadow {
   box-shadow: 0 2px 5px #999;
-  transition: box-shadow 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 .hover-shadow:hover {
   box-shadow: 0 2px 12px #999;

@@ -22,6 +22,7 @@ function PostList(props) {
   .where('uid', '==', postUid)
   .orderBy('createdAt', 'desc');
   const [posts] = useCollectionData(postsQuery, {idField: 'id'});
+
   // get user doc from current uid for friends
   const userDocRef = currentUid ?
   firebase.firestore().collection('users').doc(currentUid) :
@@ -32,6 +33,7 @@ function PostList(props) {
   const [content, setContent] = useState('');
   async function makePost(e) {
     e.preventDefault();
+    setContent('');
     // check content length
     if (content.length > maxPostLength) {
       alert(`Content cannot be longer than ${maxPostLength} characters.`);
@@ -48,8 +50,6 @@ function PostList(props) {
       content: content,
       createdAt: new Date()
     });
-    // reset content field
-    setContent('');
   }
 
   async function updateFriend(addingFriend) {
