@@ -21,3 +21,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 .eslintcache
+
+# config
+/src/util/firebaseConfig.js
