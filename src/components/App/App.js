@@ -11,6 +11,7 @@ import Settings from '../Settings/Settings.js';
 import About from '../About/About.js';
 import Friends from '../Friends/Friends.js';
 import Messages from '../Messages/Messages.js';
+import Discover from '../Discover/Discover.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -110,20 +111,24 @@ function Page() {
           <Redirect to="/signin" />
         }
         </Route>
-        {/* about page */}
-        <Route path="/about">
-          <About />
+        {/* discover page */}
+        <Route path="/discover">
+        {
+          firebase.auth().currentUser ?
+          <Discover /> :
+          <Redirect to="/signin" />
+        }
         </Route>
         {/* username page */}
         <Route path="/:urlUsername">
           <Profile />
         </Route>
-        {/* no page */}
+        {/* home page */}
         <Route path="/">
         {
           firebase.auth().currentUser ?
           <Redirect to={`/${username}`} /> :
-          <Redirect to="/signin" />
+          <About />
         }
         </Route>
       </Switch>

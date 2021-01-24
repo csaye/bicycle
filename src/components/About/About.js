@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import './About.css';
 
@@ -5,11 +6,14 @@ function About() {
   return (
     <div className="About Form hover-shadow flex-col">
       {/* Title */}
-      <h1>About Bicycle</h1>
+      <h1>Bicycle</h1>
       <p className="tagline">
       A minimalist social media placing its users first.
       Post thoughts, connect with friends, and keep it simple on Bicycle.
       </p>
+      <div className="links">
+        <Link to="/signin">Sign in</Link> | <Link to="/signup">Sign up</Link>
+      </div>
       <hr />
       {/* GitHub */}
       <p className="text-center">

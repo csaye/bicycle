@@ -60,7 +60,7 @@ function SignUp() {
       usernameLower: username.toLowerCase(),
       displayName: displayName,
       registered: new Date(),
-      friends: [],
+      friends: ['b7rWEEyhUOSCFDbQPBqoCTVmFIA3'],
       status: ''
     });
     // go to home page
