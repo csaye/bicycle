@@ -1,5 +1,7 @@
+import './Discover.css';
 import firebase from 'firebase/app';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import User from '../User/User.js';
@@ -10,7 +12,7 @@ function Discover() {
   const uid = firebase.auth().currentUser.uid;
 
   const [friendsQuery, setFriendsQuery] = useState(undefined);
-  const [friends] = useCollectionData(friendsQuery);
+  const [friends] = useCollectionData(friendsQuery, {idField: 'id'});
   // gets query for current user friends
   async function getFriendsQuery() {
     const usersRef = firebase.firestore().collection('users');
@@ -35,8 +37,11 @@ function Discover() {
     friends.forEach(f => {
       // for each friend of friend
       f.friends.forEach(ff => {
-        // if not already in list add to duids
-        if (!dUids.includes(ff)) dUids.push(ff);
+        // if not already in duids list or friends list or self
+        if (!dUids.includes(ff) && ff !== uid && !friends.some(fr => fr.id === ff)) {
+          // add to duids
+          dUids.push(ff);
+        }
       })
     });
     setDiscoverUids(dUids.slice());
@@ -63,8 +68,25 @@ function Discover() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [discoverUids]);
 
+  const [sortedUsers, setSortedUsers] = useState(undefined);
+  // gets users sorted by username lower
+  function getSortedUsers() {
+    const sUsers = users.slice();
+    sUsers.sort((a, b) => {
+      if (a.usernameLower < b.usernameLower) return -1;
+      if (a.usernameLower > b.usernameLower) return 1;
+      return 0;
+    });
+    setSortedUsers(sUsers);
+  }
+  // get sorted users on users change
+  useEffect(() => {
+    if (users) getSortedUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [users])
+
   // if no users yet, wait
-  if (!users) {
+  if (!sortedUsers) {
     return (
       <div className="Discover">
         <p>Retrieving users...</p>
@@ -74,11 +96,18 @@ function Discover() {
 
   return (
     <div className="Discover">
-      {
-        users.length > 0 ?
-        users.map(u => <User key={u.id} data={u} />) :
-        <p>No recommendations yet</p>
-      }
+      { sortedUsers.length > 0 && <p className="may-know">Users you may know</p> }
+      <div className="user-list">
+        {
+          sortedUsers.length > 0 ?
+          sortedUsers.map(u => <User key={u.id} data={u} />) :
+          <div>
+            No recommendations yet.
+            <br />
+            Friend <Link to="/bicycle">@bicycle</Link> for a starting point.
+          </div>
+        }
+      </div>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.Discover {
+  margin: 10px;
+}
+
+.Discover .may-know {
+  margin: 20px 0 0 10px;
+}
+
+.Discover .user-list {
+  display: flex;
+  flex-wrap: wrap;
+}

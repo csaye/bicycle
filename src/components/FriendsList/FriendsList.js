@@ -1,6 +1,7 @@
 import './FriendsList.css';
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Link } from 'react-router-dom';
 
 import User from '../User/User.js';
 import PostList from '../PostList/PostList.js';
@@ -37,7 +38,11 @@ function FriendsList(props) {
         {
           sortedFriends?.length > 0 ?
           sortedFriends.map(u => <User key={u.id} data={u} />) :
-          <p>No friends yet. Better invite some!</p>
+          <div>
+            No friends yet.
+            <br />
+            Friend <Link to="/bicycle">@bicycle</Link> for a starting point.
+          </div>
         }
       </div>
       <div className="friends-posts">
