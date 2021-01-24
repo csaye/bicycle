@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 const reservedUsernames = [
-  'signin', 'signup', 'users', 'settings', 'about', 'friends', 'messages'
+  'signin', 'signup', 'users', 'settings', 'about', 'friends', 'messages', 'discover'
 ];
 
 // returns whether username is taken
