@@ -11,6 +11,20 @@ function About() {
       Post thoughts, connect with friends, and keep it simple on Bicycle.
       </p>
       <hr />
+      {/* GitHub */}
+      <p className="text-center">
+      Bicycle is <span className="font-weight-bold">100% open source.</span>
+      <br />
+      Have an issue? Want to contribute? Find our GitHub here:
+      <br />
+      <i className="fab fa-github icon-black"></i> <a
+      href="https://github.com/csaye/bicycle"
+      target="_blank"
+      rel="noreferrer">
+      Bicycle GitHub
+      </a>
+      </p>
+      <hr />
       {/* Quote */}
       <h2 className="text-center font-italic font-weight-bold">
       “No one got upset when bicycles showed up.
@@ -24,31 +38,21 @@ function About() {
       It has its own goals, and it has its own means of pursuing
       them by using your psychology against you.”
       </p>
-      <p>- Tristan Harris (HumaneTech co-founder)</p>
+      <p>
+      - <a href="https://www.tristanharris.com/" target="_blank" rel="noreferrer">
+      Tristan Harris
+      </a> (former Google design ethicist)
+      </p>
       <hr />
       <p className="text-center">
-      Bicycle was founded on the principles of
-      <span className="font-weight-bold"> privacy, safety, and simplicity. </span>
-      Our aim is to leave behind all that hinders modern social media —
-      data collection, targeted advertisements, and number-focused engagement —
-      and provide a way for people to just share their thoughts and connect.
+      Bicycle, founded on the principles of privacy, safety, and simplicity,
+      <span className="font-weight-bold"> aims to be that tool. </span>
+      We leave behind all that hinders modern social media —
+      data collection, targeted advertising, and number-focused engagement —
+      to provide a way for people to just share their thoughts and connect.
       </p>
       <img src={logo} alt="logo" />
       <p>Thank you for using Bicycle.</p>
-      <hr />
-      {/* GitHub */}
-      <p className="text-center">
-      Bicycle is <span className="font-weight-bold">100% open source.</span>
-      <br />
-      Have an issue? Want to contribute? Find our GitHub here:
-      <br />
-      <a
-      href="https://github.com/csaye/bicycle"
-      target="_blank"
-      rel="noreferrer">
-      Bicycle GitHub
-      </a>
-      </p>
     </div>
   );
 }

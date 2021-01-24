@@ -1,5 +1,5 @@
 .About {
-  width: 540px;
+  width: 560px;
 }
 
 .About h2 {
@@ -9,4 +9,5 @@
 
 .About img {
   width: 60px;
+  margin: 5px 0;
 }
