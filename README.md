@@ -9,9 +9,9 @@ Try it here: [bicycle.social](https://bicycle.social)
 ***“No one got upset when bicycles showed up.***\
 *If something is a tool, it genuinely is just sitting there, waiting patiently. If something is not a tool, it’s demanding things from you...That’s what’s changed. **Social media isn’t a tool that’s just waiting to be used.** It has its own goals, and it has its own means of pursuing them by using your psychology against you.”*
 
-– Tristan Harris (HumaneTech co-founder)
+– Tristan Harris (former Google design ethicist)
 
-Bicycle was founded on the principles of **privacy, safety, and simplicity.** Our aim is to leave behind all that hinders modern social media — data collection, targeted advertisements, and number-focused engagement — and provide a way for people to just share their thoughts and connect.
+Bicycle, founded on the principles of privacy, safety, and simplicity, **aims to be that tool.** We leave behind all that hinders modern social media — data collection, targeted advertising, and number-focused engagement — to provide a way for people to just share their thoughts and connect.
 
 ## Available Scripts
 
