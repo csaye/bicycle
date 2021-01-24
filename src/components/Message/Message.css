@@ -23,9 +23,5 @@
 }
 
 .Message .delete-button {
-  height: 25px;
-  width: 25px;
-  padding: 0;
-  padding-bottom: 3px;
-  font-size: 16px;
+  margin-left: 10px;
 }

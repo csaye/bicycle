@@ -1,4 +1,5 @@
 import './Message.css';
+import React, { useState } from 'react';
 import firebase from 'firebase/app';
 
 function Message(props) {
@@ -6,6 +7,8 @@ function Message(props) {
 
   // get uid
   const uid = firebase.auth().currentUser.uid;
+
+  const [deleting, setDeleting] = useState(false);
 
   // deletes message from firebase by id
   async function deleteMessage() {
@@ -23,7 +26,15 @@ function Message(props) {
       {
         // if own message, show delete button
         uid === senderUid &&
-        <button onClick={deleteMessage} className="delete-button">✖</button>
+        <button onClick={() => setDeleting(!deleting)} className="x-button">✖</button>
+      }
+      {
+        deleting &&
+        <div>
+          <p className="font-weight-bold">Really delete this message?</p>
+          <button onClick={() => setDeleting(false)}>No</button>
+          <button onClick={deleteMessage} className="delete-button">Yes</button>
+        </div>
       }
     </div>
   );

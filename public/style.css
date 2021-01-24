@@ -27,6 +27,13 @@ button, input, textarea {
   justify-content: center;
 }
 
+.x-button {
+  height: 25px;
+  width: 25px;
+  padding: 0;
+  font-size: 16px;
+}
+
 /* Shadows */
 
 .shadowed {

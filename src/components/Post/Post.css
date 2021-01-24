@@ -61,3 +61,7 @@
 .Post p {
   margin: 10px 0;
 }
+
+.Post .delete-button {
+  margin-left: 10px;
+}
