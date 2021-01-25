@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import firebase from 'firebase/app';
 import defaultProfile from '../../img/defaultProfile.png';
 
+import ProfileExtras from '../ProfileExtras/ProfileExtras.js';
 import PostList from '../PostList/PostList.js';
 
 // Profile component
@@ -125,6 +126,7 @@ function Profile() {
             }
           </div>
       }
+      <ProfileExtras uid={uid} displayName={displayName} />
       <hr />
       <PostList uid={uid} displayName={displayName} username={username} />
     </div>
