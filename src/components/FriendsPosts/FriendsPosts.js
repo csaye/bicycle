@@ -9,10 +9,12 @@ function FriendsPosts(props) {
 
   // get friends' posts
   const postsRef = firebase.firestore().collection('posts');
-  const query = postsRef
+  const query = friendUids.length > 0 ?
+  postsRef
   .where('uid', 'in', friendUids)
   .orderBy('createdAt', 'desc')
-  .limit(32);
+  .limit(32) :
+  postsRef.where('__name__', '==', 'null');
   const [posts] = useCollectionData(query, {idField: 'id'});
 
   // if no posts yet, wait

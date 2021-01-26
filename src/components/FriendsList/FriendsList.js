@@ -45,7 +45,7 @@ function FriendsList(props) {
         {
           sortedFriends?.length > 0 ?
           sortedFriends.map(u => <User key={u.id} data={u} />) :
-          <div>
+          <div className="margin-sm">
             No friends yet.
             <br />
             Friend <Link to="/bicycle">@bicycle</Link> for a starting point.
