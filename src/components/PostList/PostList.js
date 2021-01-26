@@ -20,7 +20,7 @@ function PostList(props) {
   if (!posts) {
     return (
       <div className="PostList">
-        <p>Retrieving posts...</p>
+        <p className="margin-sm">Retrieving posts...</p>
       </div>
     );
   }
@@ -31,7 +31,7 @@ function PostList(props) {
         {
           posts?.length > 0 ?
           posts.map(p => <Post key={p.id} postData={p} username={username} displayName={displayName} />) :
-          <p className="no-posts-yet">No posts yet</p>
+          <p className="margin-sm">No posts yet</p>
         }
       </div>
     </div>

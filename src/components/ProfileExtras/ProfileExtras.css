@@ -1,0 +1,20 @@
+.ProfileExtras form {
+  margin: 10px 0;
+}
+
+.ProfileExtras form textarea {
+  width: 100%;
+}
+
+.ProfileExtras .friend-button {
+  margin: 10px 0;
+}
+
+.ProfileExtras .post-button {
+  margin: 0 5px 10px 0;
+}
+
+.ProfileExtras .post-length {
+  display: inline-block;
+  margin: 0;
+}

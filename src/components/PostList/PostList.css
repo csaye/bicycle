@@ -1,34 +1,3 @@
-.PostList form {
-  margin: 14px 0 0 10px;
-}
-
-.PostList form textarea {
-  width: 250px;
-}
-
-.PostList .friend-button {
-  margin: 5px 0 10px 10px;
-}
-
-.PostList .posts {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.PostList .no-posts-yet {
-  margin-left: 10px;
-}
-
-.PostList .post-button {
-  margin: 0 5px 15px 0;
-}
-
-.PostList .post-length {
-  display: inline-block;
-  margin: 0;
-}
-
-.PostList .post-list {
-  display: flex;
-  flex-wrap: wrap;
+.PostList {
+  margin-left: 400px;
 }

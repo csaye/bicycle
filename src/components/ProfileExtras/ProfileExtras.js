@@ -1,3 +1,4 @@
+import './ProfileExtras.css';
 import React, { useState } from 'react';
 import firebase from 'firebase/app';
 import { useDocumentData } from 'react-firebase-hooks/firestore';

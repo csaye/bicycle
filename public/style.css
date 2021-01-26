@@ -34,6 +34,10 @@ button, input, textarea {
   font-size: 16px;
 }
 
+.margin-sm {
+  margin: 10px;
+}
+
 /* Shadows */
 
 .shadowed {

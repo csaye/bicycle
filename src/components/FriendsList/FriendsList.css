@@ -15,10 +15,12 @@
 }
 .FriendsList .PostList {
   width: 200px;
+  margin: 0;
 }
 .FriendsList .PostList .friend-button {
   width: 180px;
 }
 .FriendsList .PostList .Post {
   width: 180px;
+  margin: 10px;
 }

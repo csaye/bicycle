@@ -1,5 +1,10 @@
-.Profile {
-  margin: 10px;
+.Profile .sidebar {
+  background-color: #bbb;
+  width: 400px;
+  padding: 20px;
+  height: 100%;
+  position: fixed;
+  transform: translateY(-20px);
 }
 
 .Profile .profile-picture {
@@ -9,11 +14,11 @@
   border-radius: 30px;
   display: inline-block;
   box-shadow: 0 0 5px #333;
-  margin: 10px 15px 5px 10px;
+  margin: 10px 15px 5px 0;
 }
 
 .Profile .profile-title {
-  margin: 0;
+  margin: 0 10px 0 0;
   display: inline-block;
   font-size: 36px;
   vertical-align: bottom;
@@ -21,16 +26,15 @@
 
 .Profile .profile-subtitle {
   display: inline-block;
-  margin: 0 0 7px 10px;
   font-size: 24px;
   vertical-align: bottom;
 }
 
 .Profile .status-input {
-  margin: 10px 10px 0 10px;
-  width: 300px;
+  margin: 10px 5px 0 0;
+  width: 225px;
 }
 
 .Profile .status-updated, .Profile .status-text {
-  margin: 10px 0 0 10px;
+  margin: 10px 0;
 }

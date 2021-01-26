@@ -74,7 +74,7 @@ function Profile() {
   if (loading) {
     return (
       <div className="Profile">
-        <p>Retrieving profile...</p>
+        <p className="margin-sm">Retrieving profile...</p>
       </div>
     );
   }
@@ -91,43 +91,44 @@ function Profile() {
   // if valid data, show profile
   return (
     <div className="Profile">
-      <img
-      className="profile-picture"
-      src={profileURL ? profileURL : defaultProfile}
-      alt="profile pic"
-      />
-      <p className="profile-title">{displayName}</p>
-      <Link to={`/${username}`} className="profile-subtitle">@{username}</Link>
-      {
-          // status input if own user page
-          firebase.auth().currentUser?.uid === uid ?
-          <div>
-            <input
-            value={status}
-            type="text"
-            className="status-input"
-            placeholder="status"
-            onChange={e => setStatus(e.target.value)}
-            maxLength="64"
-            />
-            <button onClick={updateStatus}>
-            Update status
-            </button>
-            {
-              statusUpdated &&
-              <p className="status-updated text-success">Status updated successfully</p>
-            }
-          </div> :
-          // status text if not own user page
-          <div>
-            {
-              status &&
-              <h5 className="status-text font-italic">{status}</h5>
-            }
-          </div>
-      }
-      <ProfileExtras uid={uid} displayName={displayName} />
-      <hr />
+      <div className="sidebar">
+        <img
+        className="profile-picture"
+        src={profileURL ? profileURL : defaultProfile}
+        alt="profile pic"
+        />
+        <p className="profile-title">{displayName}</p>
+        <Link to={`/${username}`} className="profile-subtitle">@{username}</Link>
+        {
+            // status input if own user page
+            firebase.auth().currentUser?.uid === uid ?
+            <div>
+              <input
+              value={status}
+              type="text"
+              className="status-input"
+              placeholder="status"
+              onChange={e => setStatus(e.target.value)}
+              maxLength="64"
+              />
+              <button onClick={updateStatus}>
+              Update status
+              </button>
+              {
+                statusUpdated &&
+                <p className="status-updated text-success font-weight-bold">Status updated successfully</p>
+              }
+            </div> :
+            // status text if not own user page
+            <div>
+              {
+                status &&
+                <h5 className="status-text font-italic">{status}</h5>
+              }
+            </div>
+        }
+        <ProfileExtras uid={uid} displayName={displayName} />
+      </div>
       <PostList uid={uid} displayName={displayName} username={username} />
     </div>
   )
