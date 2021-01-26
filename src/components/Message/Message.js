@@ -8,8 +8,6 @@ function Message(props) {
   // get uid
   const uid = firebase.auth().currentUser.uid;
 
-  const [deleting, setDeleting] = useState(false);
-
   // deletes message from firebase by id
   async function deleteMessage() {
     await firebase.firestore().collection('messages').doc(id).delete();
@@ -26,16 +24,18 @@ function Message(props) {
       {
         // if own message, show delete button
         uid === senderUid &&
-        <button onClick={() => setDeleting(!deleting)} className="x-button">✖</button>
+        <button
+        data-toggle="collapse"
+        data-target={`#messageCollapse-${id}`}
+        className="x-button">
+        ✖
+        </button>
       }
-      {
-        deleting &&
-        <div>
-          <p className="font-weight-bold">Really delete this message?</p>
-          <button onClick={() => setDeleting(false)}>No</button>
-          <button onClick={deleteMessage} className="delete-button">Yes</button>
-        </div>
-      }
+      <div className="collapse" id={`messageCollapse-${id}`}>
+        <p className="font-weight-bold">Really delete this message?</p>
+        <button data-toggle="collapse" data-target={`#messageCollapse-${id}`}>No</button>
+        <button onClick={deleteMessage} className="delete-button">Yes</button>
+      </div>
     </div>
   );
 }

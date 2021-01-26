@@ -1,5 +1,4 @@
 import './Post.css';
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 
@@ -8,8 +7,6 @@ function Post(props) {
   const { id, uid, content, createdAt } = props.postData;
   const username = props.username;
   const displayName = props.displayName;
-
-  const [deleting, setDeleting] = useState(false);
 
   // deletes message from firebase by id
   async function deletePost() {
@@ -24,16 +21,18 @@ function Post(props) {
       <p>{content}</p>
       {
         firebase.auth().currentUser?.uid === uid &&
-        <button onClick={() => setDeleting(!deleting)} className="x-button">✖</button>
+        <button
+        data-toggle="collapse"
+        data-target={`#postCollapse-${id}`}
+        className="x-button">
+        ✖
+        </button>
       }
-      {
-        deleting &&
-        <div>
-          <p className="text-danger">Really delete this post?</p>
-          <button onClick={() => setDeleting(false)}>No</button>
-          <button onClick={deletePost} className="delete-button">Yes</button>
-        </div>
-      }
+      <div className="collapse" id={`postCollapse-${id}`}>
+        <p className="text-danger">Really delete this post?</p>
+        <button data-toggle="collapse" data-target={`#postCollapse-${id}`}>No</button>
+        <button onClick={deletePost} className="delete-button">Yes</button>
+      </div>
     </div>
   );
 }
