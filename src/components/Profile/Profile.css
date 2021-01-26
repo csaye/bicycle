@@ -1,10 +1,20 @@
+.Profile {
+  overflow: auto;
+}
+
 .Profile .sidebar {
   background-color: #bbb;
   width: 400px;
   padding: 20px;
   height: 100%;
   position: fixed;
-  transform: translateY(-20px);
+}
+
+@media (max-width: 767px) {
+  .Profile .sidebar {
+    position: static;
+    width: 100%;
+  }
 }
 
 .Profile .profile-picture {
@@ -14,7 +24,7 @@
   border-radius: 30px;
   display: inline-block;
   box-shadow: 0 0 5px #333;
-  margin: 10px 15px 5px 0;
+  margin: 0 15px 5px 0;
 }
 
 .Profile .profile-title {
@@ -28,6 +38,7 @@
   display: inline-block;
   font-size: 24px;
   vertical-align: bottom;
+  margin-bottom: 5px;
 }
 
 .Profile .status-input {

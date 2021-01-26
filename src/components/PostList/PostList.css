@@ -1,3 +1,9 @@
 .PostList {
   margin-left: 400px;
 }
+
+@media (max-width: 767px) {
+  .PostList {
+    margin-left: 0;
+  }
+}
