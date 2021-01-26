@@ -4,13 +4,14 @@ import firebase from 'firebase/app';
 import { usernameTaken } from '../../util/usernameData.js';
 
 function Settings() {
-  let [displayName, setDisplayName] = useState('');
-  let [username, setUsername] = useState('');
-  let [profilePicture, setProfilePicture] = useState(undefined);
+  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
+  const [profilePicture, setProfilePicture] = useState(undefined);
 
-  let [error, setError] = useState('');
-  let [deleting, setDeleting] = useState(false);
-  let [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [deleting, setDeleting] = useState(false);
+  const [password, setPassword] = useState('');
 
   async function getUserData() {
     // set username and display name
@@ -25,10 +26,15 @@ function Settings() {
     getUserData();
   }, []);
 
+  function resetInfo() {
+    setError('');
+    setSuccess('');
+    setDeleting(false);
+  }
+
   async function changeDisplayName(e) {
     e.preventDefault();
-    setError('');
-    setDeleting(false);
+    resetInfo();
     // verify display name length
     if (displayName.length < 1 || displayName.length > 32) {
       setError("Display name must be between 1 and 32 characters.");
@@ -59,8 +65,7 @@ function Settings() {
 
   async function changeUsername(e) {
     e.preventDefault();
-    setError('');
-    setDeleting(false);
+    resetInfo();
     // verify username chars
     if (!/^([A-Za-z0-9_]{0,})$/.test(username)) {
       setError("Username can only contain alphanumeric characters and underscore.");
@@ -98,8 +103,7 @@ function Settings() {
 
   async function changeProfilePicture(e) {
     e.preventDefault();
-    setError('');
-    setDeleting(false);
+    resetInfo();
     // return if no profile picture
     if (!profilePicture) {
       setError("Please upload a profile picture.");
@@ -113,19 +117,27 @@ function Settings() {
     }
   }
 
+  async function resetPassword() {
+    resetInfo();
+    const currentEmail = firebase.auth().currentUser.email;
+    try {
+      await firebase.auth().sendPasswordResetEmail(currentEmail);
+      setSuccess(`Email successfully sent to ${currentEmail}`);
+    } catch(e) {
+      setError(e.message);
+    }
+  }
+
   function startDelete() {
+    setSuccess('');
     setError(deleting ? '' : "Re-enter password to permanently delete account and all posts.");
     setDeleting(!deleting);
-  }
-  function cancelDelete() {
-    setError('');
-    setDeleting(false);
   }
 
   // deletes a user and all of their posts
   async function deleteAccount(e) {
     e.preventDefault();
-    setError('');
+    resetInfo();
 
     // sign in user again
     const email = firebase.auth().currentUser.email;
@@ -202,10 +214,10 @@ function Settings() {
 
   return (
     <div className="Settings Form hover-shadow flex-col">
-      {/* Title */}
+      {/* title */}
       <h1>Settings</h1>
       <hr />
-      {/* Display Name */}
+      {/* display name */}
       <form onSubmit={changeDisplayName}>
         <label htmlFor="displayNameInput">Display Name</label>
         <input
@@ -218,7 +230,7 @@ function Settings() {
         />
         <button type="submit">Change display name</button>
       </form>
-      {/* Username */}
+      {/* username */}
       <form onSubmit={changeUsername}>
         <label htmlFor="usernameInput">Username</label>
         <input
@@ -231,7 +243,7 @@ function Settings() {
         />
         <button type="submit">Change username</button>
       </form>
-      {/* Profile Picture */}
+      {/* profile picture */}
       <form onSubmit={changeProfilePicture}>
         <input
         type="file"
@@ -241,16 +253,22 @@ function Settings() {
         />
         <button type="submit">Change profile picture</button>
       </form>
-      {/* Delete Account */}
-      <button onClick={startDelete}>Delete account</button>
-      {/* Error */}
+      <div>
+        {/* reset password */}
+        <button onClick={resetPassword}>Reset password</button>
+        {/* delete account */}
+        <button onClick={startDelete} className="delete-account">Delete account</button>
+      </div>
+      {/* error */}
       { error && <p className="text-danger text-center">{error}</p> }
-      {/* Delete Button */}
+      {/* success */}
+      { success && <p className="text-success text-center">{success}</p> }
+      {/* delete button */}
       {
         deleting &&
         <div className="flex-col">
           <form onSubmit={deleteAccount}>
-            {/* Password */}
+            {/* password */}
             <label htmlFor="passwordInput">Password</label>
             <input
             value={password}
@@ -262,7 +280,7 @@ function Settings() {
             />
             <button type="submit">Yes, delete my account</button>
           </form>
-          <button onClick={cancelDelete} className="cancel-button">No, do not delete my account</button>
+          <button onClick={resetInfo} className="cancel-button">No, do not delete my account</button>
         </div>
       }
     </div>

@@ -6,8 +6,8 @@ import firebase from 'firebase/app';
 function ResetPassword() {
   let [email, setEmail] = useState('');
 
-  let [success, setSuccess] = useState(undefined);
-  let [error, setError] = useState(undefined);
+  let [success, setSuccess] = useState('');
+  let [error, setError] = useState('');
 
   // select email field on start
   useEffect(() => {
@@ -16,8 +16,8 @@ function ResetPassword() {
 
   async function resetPassword(e) {
     e.preventDefault();
-    setSuccess(undefined);
-    setError(undefined);
+    setSuccess('');
+    setError('');
     // send password reset email
     const currentEmail = email;
     try {
@@ -37,11 +37,11 @@ function ResetPassword() {
   return (
     <div className="ResetPassword Form hover-shadow">
       <form onSubmit={resetPassword} className="flex-col">
-        {/* Title */}
+        {/* title */}
         <h1>Reset Password</h1>
         <p className="tagline">Please enter your account email.</p>
         <hr />
-        {/* Email */}
+        {/* email */}
         <label htmlFor="emailInput">Email</label>
         <input
         value={email}
@@ -51,14 +51,14 @@ function ResetPassword() {
         onChange={e => setEmail(e.target.value)}
         required
         />
-        {/* Button */}
+        {/* button */}
         <button type="submit">Send Reset Email</button>
-        {/* Success */}
+        {/* success */}
         { success && <p className="text-success text-center">{success}</p> }
-        {/* Error */}
+        {/* error */}
         { error && <p className="text-danger text-center">{error}</p> }
         <hr />
-        {/* Sign in */}
+        {/* sign in */}
         <Link to="/signin" className="link">Back to sign in page</Link>
       </form>
     </div>
