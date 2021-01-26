@@ -6,9 +6,7 @@ import $ from 'jquery';
 
 // Post component
 function Post(props) {
-  const { id, uid, content, createdAt } = props.postData;
-  const username = props.username;
-  const displayName = props.displayName;
+  const { id, uid, content, username, displayName, createdAt } = props.postData;
 
   // initialize tooltips on start
   useEffect(() => {
@@ -25,7 +23,7 @@ function Post(props) {
       <h1>{displayName}</h1>
       <Link to={`/${username}`} className="link">@{username}</Link>
       <h2>{createdAt.toDate().toDateString()} {createdAt.toDate().toLocaleTimeString()}</h2>
-      <p>{content}</p>
+      <p className="post-content">{content}</p>
 
       {
         firebase.auth().currentUser?.uid === uid &&
@@ -39,7 +37,7 @@ function Post(props) {
         </span>
       }
       <div className="collapse" id={`postCollapse-${id}`}>
-        <p className="text-danger">Really delete this post?</p>
+        <p className="text-danger really-delete">Really delete this post?</p>
         <button data-toggle="collapse" data-target={`#postCollapse-${id}`}>No</button>
         <button onClick={deletePost} className="delete-button">Yes</button>
       </div>

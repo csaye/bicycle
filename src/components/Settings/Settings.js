@@ -34,11 +34,25 @@ function Settings() {
       setError("Display name must be between 1 and 32 characters.");
     // if display name valid
     } else {
-      // set user doc
+      // update user doc
       const uid = firebase.auth().currentUser.uid;
       await firebase.firestore().collection('users').doc(uid).update({
         displayName: displayName
       });
+      // update posts
+      const newDisplayName = { displayName: displayName }
+      await firebase.firestore().collection('posts').where('uid', '==', uid).get()
+      .then((snapshot) => {
+        // create batch
+        const batch = firebase.firestore().batch();
+        // batch all display name updates
+        snapshot.forEach((doc) => {
+          batch.update(doc.ref, newDisplayName);
+        });
+        // commit batch
+        batch.commit();
+      });
+      // go to home page
       window.location.href = "/";
     }
   }
@@ -58,12 +72,26 @@ function Settings() {
       setError("Username taken. Please try another.");
     // if username valid
     } else {
-      // set user doc
+      // update user doc
       const uid = firebase.auth().currentUser.uid;
       await firebase.firestore().collection('users').doc(uid).update({
         username: username,
         usernameLower: username.toLowerCase()
       });
+      // update posts
+      const newUsername = { username: username }
+      await firebase.firestore().collection('posts').where('uid', '==', uid).get()
+      .then((snapshot) => {
+        // create batch
+        const batch = firebase.firestore().batch();
+        // batch all username updates
+        snapshot.forEach((doc) => {
+          batch.update(doc.ref, newUsername);
+        });
+        // commit batch
+        batch.commit();
+      });
+      // go to home page
       window.location.href = "/";
     }
   }

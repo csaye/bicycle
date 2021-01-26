@@ -127,9 +127,9 @@ function Profile() {
               }
             </div>
         }
-        <ProfileExtras uid={uid} displayName={displayName} />
+        <ProfileExtras uid={uid} displayName={displayName} username={username} />
       </div>
-      <PostList uid={uid} displayName={displayName} username={username} />
+      <PostList uid={uid} />
     </div>
   )
 }

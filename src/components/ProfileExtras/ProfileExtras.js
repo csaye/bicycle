@@ -7,6 +7,7 @@ const maxPostLength = 128;
 
 function ProfileExtras(props) {
   const postUid = props.uid;
+  const username = props.username;
   const displayName = props.displayName;
 
   // get current uid
@@ -32,7 +33,9 @@ function ProfileExtras(props) {
     await firebase.firestore().collection('posts').add({
       uid: firebase.auth().currentUser.uid,
       content: content,
-      createdAt: new Date()
+      createdAt: new Date(),
+      username: username,
+      displayName: displayName
     });
   }
 

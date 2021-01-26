@@ -7,8 +7,6 @@ import Post from '../Post/Post.js';
 // PostList component
 function PostList(props) {
   const postUid = props.uid;
-  const username = props.username;
-  const displayName = props.displayName;
 
   // get posts from post uid
   const postsRef = firebase.firestore().collection('posts');
@@ -30,7 +28,7 @@ function PostList(props) {
       <div className="posts">
         {
           posts?.length > 0 ?
-          posts.map(p => <Post key={p.id} postData={p} username={username} displayName={displayName} />) :
+          posts.map(p => <Post key={p.id} postData={p} />) :
           <p className="margin-sm">No posts yet</p>
         }
       </div>
