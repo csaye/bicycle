@@ -12,6 +12,7 @@ import About from '../About/About.js';
 import Friends from '../Friends/Friends.js';
 import Messages from '../Messages/Messages.js';
 import Discover from '../Discover/Discover.js';
+import ResetPassword from '../ResetPassword/ResetPassword.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -73,51 +74,59 @@ function Page() {
       <Switch>
         {/* signin page */}
         <Route path="/signin">
-        {
-          firebase.auth().currentUser ?
-          <Redirect to={`/${username}`} /> :
-          <SignIn />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Redirect to={`/${username}`} /> :
+            <SignIn />
+          }
         </Route>
         {/* signup page */}
         <Route path="/signup">
-        {
-          firebase.auth().currentUser ?
-          <Redirect to={`/${username}`} /> :
-          <SignUp />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Redirect to={`/${username}`} /> :
+            <SignUp />
+          }
         </Route>
         {/* friends page */}
         <Route path="/friends">
-        {
-          firebase.auth().currentUser ?
-          <Friends /> :
-          <Redirect to="/signin" />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Friends /> :
+            <Redirect to="/signin" />
+          }
         </Route>
         {/* messages page */}
         <Route path="/messages">
-        {
-          firebase.auth().currentUser ?
-          <Messages /> :
-          <Redirect to="/signin" />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Messages /> :
+            <Redirect to="/signin" />
+          }
         </Route>
         {/* settings page */}
         <Route path="/settings">
-        {
-          firebase.auth().currentUser ?
-          <Settings /> :
-          <Redirect to="/signin" />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Settings /> :
+            <Redirect to="/signin" />
+          }
         </Route>
         {/* discover page */}
         <Route path="/discover">
-        {
-          firebase.auth().currentUser ?
-          <Discover /> :
-          <Redirect to="/signin" />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Discover /> :
+            <Redirect to="/signin" />
+          }
+        </Route>
+        {/* reset password page */}
+        <Route path="/resetpassword">
+          {
+            firebase.auth().currentUser ?
+            <Redirect to={`/${username}`} /> :
+            <ResetPassword />
+          }
         </Route>
         {/* username page */}
         <Route path="/:urlUsername">
@@ -125,11 +134,11 @@ function Page() {
         </Route>
         {/* home page */}
         <Route path="/">
-        {
-          firebase.auth().currentUser ?
-          <Redirect to={`/${username}`} /> :
-          <About />
-        }
+          {
+            firebase.auth().currentUser ?
+            <Redirect to={`/${username}`} /> :
+            <About />
+          }
         </Route>
       </Switch>
     </div>

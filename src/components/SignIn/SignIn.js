@@ -23,8 +23,10 @@ function SignIn() {
       window.location.href = '/';
     // catch error
     } catch(e) {
-      if (e.code === 'auth/user-not-found') {
-        setError('Unknown email. Please try again.');
+      if (e.code === 'auth/invalid-email') {
+        setError('Invalid email address.')
+      } else if (e.code === 'auth/user-not-found') {
+        setError('Unknown email address.');
       } else if (e.code === 'auth/wrong-password') {
         setError('Incorrect password. Please try again.');
       } else if (e.code === 'auth/too-many-requests') {
@@ -64,11 +66,13 @@ function SignIn() {
         />
         {/* Button */}
         <button type="submit">Sign In</button>
+        {/* Error */}
+        { error && <p className="text-danger text-center">{error}</p> }
         <hr />
         {/* Sign up */}
         <Link to="/signup" className="link">No account? Sign up</Link>
-        {/* Error */}
-        { error && <p className="text-danger text-center">{error}</p> }
+        {/* Reset password */}
+        <Link to="/resetpassword" className="link">Forgot password? Reset password</Link>
       </form>
     </div>
   );

@@ -83,7 +83,7 @@ function Profile() {
   if (!uid || !displayName || !username) {
     return (
       <div className="Profile">
-        <p>Could not find this user. Make sure the username is correct.</p>
+        <p className="margin-sm">Could not find this user. Make sure the username is correct.</p>
       </div>
     );
   }

@@ -116,11 +116,11 @@ function SignUp() {
         />
         {/* Button */}
         <button type="submit">Sign Up</button>
+        {/* Error */}
+        { error && <p className="text-danger text-center">{error}</p> }
         <hr />
         {/* Sign in */}
         <Link to="/signin" className="link">Already have an account? Sign in</Link>
-        {/* Error */}
-        { error && <p className="text-danger text-center">{error}</p> }
       </form>
     </div>
   );
