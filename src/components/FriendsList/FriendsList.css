@@ -1,26 +1,23 @@
-.FriendsList .friends-users {
-  display: flex;
-  flex-wrap: wrap;
-}
-.FriendsList .User {
-  width: 180px;
-}
-.FriendsList .friend-button {
-  margin: 5px 10px;
+.FriendsList .friends-title {
+  margin: 5px 0 0 0;
+  font-size: 32px;
 }
 
-.FriendsList .friends-posts {
-  display: flex;
-  flex-wrap: wrap;
+.FriendsList .friends-hr {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid #999;
 }
-.FriendsList .PostList {
-  width: 200px;
-  margin: 0;
+
+.FriendsList .friends-users {
+  background-color: #bbb;
+  width: 220px;
+  position: fixed;
+  height: 100%;
 }
-.FriendsList .PostList .friend-button {
-  width: 180px;
-}
-.FriendsList .PostList .Post {
-  width: 180px;
-  margin: 10px;
+
+@media (max-width: 575px) {
+  .FriendsList .friends-users {
+    display: none;
+  }
 }

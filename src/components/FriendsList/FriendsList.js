@@ -4,7 +4,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Link } from 'react-router-dom';
 
 import User from '../User/User.js';
-import PostList from '../PostList/PostList.js';
+import FriendsPosts from '../FriendsPosts/FriendsPosts.js';
 
 // FriendsList component
 function FriendsList(props) {
@@ -20,21 +20,28 @@ function FriendsList(props) {
 
   if (!friends) {
     return (
-      <div className="FriendsList">Retrieving friends...</div>
+      <div className="FriendsList">
+        <p className="margin-sm">Retrieving friends...</p>
+      </div>
     )
   }
 
   // sort friends by username
-  let sortedFriends = friends.slice();
+  const sortedFriends = friends.slice();
   sortedFriends.sort((a, b) => {
       if (a.usernameLower < b.usernameLower) return -1;
       if (a.usernameLower > b.usernameLower) return 1;
       return 0;
   });
 
+  // get friend uids
+  const friendUids = friends.map(f => f.id);
+
   return (
     <div className="FriendsList">
       <div className="friends-users">
+        { sortedFriends?.length > 0 && <p className="friends-title text-center">Friends</p> }
+        <hr className="friends-hr" />
         {
           sortedFriends?.length > 0 ?
           sortedFriends.map(u => <User key={u.id} data={u} />) :
@@ -45,12 +52,7 @@ function FriendsList(props) {
           </div>
         }
       </div>
-      <div className="friends-posts">
-        {
-          sortedFriends?.length > 0 &&
-          sortedFriends.map(u => <PostList key={u.id} uid={u.id} displayName={u.displayName} username={u.username} />)
-        }
-      </div>
+      <FriendsPosts friendUids={friendUids} />
     </div>
   )
 }

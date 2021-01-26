@@ -1,0 +1,10 @@
+.FriendsPosts {
+  overflow: auto;
+  margin-left: 220px;
+}
+
+@media (max-width: 575px) {
+  .FriendsPosts {
+    margin-left: 0;
+  }
+}
