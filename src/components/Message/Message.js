@@ -1,12 +1,18 @@
+import React, { useEffect } from 'react'
 import './Message.css';
-import React, { useState } from 'react';
 import firebase from 'firebase/app';
+import $ from 'jquery';
 
 function Message(props) {
   const { id, content, senderUid, createdAt } = props.data;
 
   // get uid
   const uid = firebase.auth().currentUser.uid;
+
+  // initialize tooltips on start
+  useEffect(() => {
+    $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" })
+  }, []);
 
   // deletes message from firebase by id
   async function deleteMessage() {
@@ -24,12 +30,14 @@ function Message(props) {
       {
         // if own message, show delete button
         uid === senderUid &&
-        <button
-        data-toggle="collapse"
-        data-target={`#messageCollapse-${id}`}
-        className="x-button">
-        ✖
-        </button>
+        <span data-toggle="tooltip" title="Delete message">
+          <button
+          data-toggle="collapse"
+          data-target={`#messageCollapse-${id}`}
+          className="x-button">
+          ✖
+          </button>
+        </span>
       }
       <div className="collapse" id={`messageCollapse-${id}`}>
         <p className="font-weight-bold">Really delete this message?</p>

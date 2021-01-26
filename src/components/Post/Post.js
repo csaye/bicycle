@@ -1,12 +1,19 @@
 import './Post.css';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
+import $ from 'jquery';
 
 // Post component
 function Post(props) {
   const { id, uid, content, createdAt } = props.postData;
   const username = props.username;
   const displayName = props.displayName;
+
+  // initialize tooltips on start
+  useEffect(() => {
+    $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" })
+  }, []);
 
   // deletes message from firebase by id
   async function deletePost() {
@@ -19,14 +26,17 @@ function Post(props) {
       <Link to={`/${username}`} className="link">@{username}</Link>
       <h2>{createdAt.toDate().toDateString()} {createdAt.toDate().toLocaleTimeString()}</h2>
       <p>{content}</p>
+
       {
         firebase.auth().currentUser?.uid === uid &&
-        <button
-        data-toggle="collapse"
-        data-target={`#postCollapse-${id}`}
-        className="x-button">
-        ✖
-        </button>
+        <span data-toggle="tooltip" title="Delete post">
+          <button
+          data-toggle="collapse"
+          data-target={`#postCollapse-${id}`}
+          className="x-button">
+          ✖
+          </button>
+        </span>
       }
       <div className="collapse" id={`postCollapse-${id}`}>
         <p className="text-danger">Really delete this post?</p>

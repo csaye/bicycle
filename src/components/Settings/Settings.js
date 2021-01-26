@@ -86,8 +86,8 @@ function Settings() {
   }
 
   function startDelete() {
-    setError("Re-enter password to permanently delete account and all posts.");
-    setDeleting(true);
+    setError(deleting ? '' : "Re-enter password to permanently delete account and all posts.");
+    setDeleting(!deleting);
   }
   function cancelDelete() {
     setError('');

@@ -90,6 +90,8 @@ function Messages() {
             sortedFriends.length > 0 ?
             sortedFriends.map(f =>
               <button key={f.id} onClick={() => {
+                // if not a change, return
+                if (friendUid === f.id) return;
                 // start loading messages
                 setLoadingMessages(true);
                 // update friend uid and name
