@@ -7,7 +7,11 @@
   width: 180px;
 }
 
-.Settings .delete-account, .Settings .cancel-button {
+.Settings .change-email {
+  margin: 0 5px;
+}
+
+.Settings .cancel-button {
   margin-left: 5px;
 }
 
