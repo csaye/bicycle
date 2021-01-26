@@ -32,6 +32,7 @@ button, input, textarea {
   width: 25px;
   padding: 0;
   font-size: 16px;
+  margin-top: 8px;
   overflow: hidden;
 }
 

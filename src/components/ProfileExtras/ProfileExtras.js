@@ -4,7 +4,6 @@ import firebase from 'firebase/app';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 const maxPostLength = 128;
-// const maxPosts = 128;
 
 function ProfileExtras(props) {
   const postUid = props.uid;
@@ -29,11 +28,6 @@ function ProfileExtras(props) {
       alert(`Content cannot be longer than ${maxPostLength} characters.`);
       return;
     }
-    // check post count
-    // if (posts.length >= maxPosts) {
-    //   alert('Too many posts. Please delete some.');
-    //   return;
-    // }
     // add post to collection
     await firebase.firestore().collection('posts').add({
       uid: firebase.auth().currentUser.uid,

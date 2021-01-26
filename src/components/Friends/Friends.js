@@ -13,7 +13,9 @@ function Friends() {
 
   if (!userDoc) {
     return (
-      <div className="Friends">Retrieving friends...</div>
+      <div className="Friends">
+        <p className="margin-sm">Retrieving friends...</p>
+      </div>
     )
   }
 
