@@ -25,7 +25,7 @@ function ResetPassword() {
       setSuccess(`Email successfully sent to ${currentEmail}`);
     } catch (e) {
       if (e.code === 'auth/invalid-email') {
-        setError('Invalid email address.')
+        setError('Invalid email address.');
       } else if (e.code === 'auth/user-not-found') {
         setError('Unknown email address.');
       } else {

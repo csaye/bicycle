@@ -1,4 +1,3 @@
-import './SettingsExtras.css';
 import React, { useState } from 'react';
 import firebase from 'firebase/app';
 
@@ -8,12 +7,14 @@ function SettingsExtras() {
 
   const [panelState, setPanelState] = useState('');
 
+  const [newEmail, setNewEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function resetInfo() {
     setError('');
     setSuccess('');
     setPanelState('');
+    setNewEmail('');
     setPassword('');
   }
 
@@ -28,8 +29,52 @@ function SettingsExtras() {
     }
   }
 
+  function startChangeEmail() {
+    setSuccess('');
+    setNewEmail('');
+    setPassword('');
+    setError(panelState !== 'email' ? "Re-enter password to change email." : '');
+    setPanelState(panelState === 'email' ? '' : 'email');
+  }
+
+  async function changeEmail(e) {
+    e.preventDefault();
+    setError('');
+
+    // sign in user again
+    const currentEmail = firebase.auth().currentUser.email;
+    try {
+      await firebase.auth().signInWithEmailAndPassword(currentEmail, password);
+    // set error and return on catch
+    } catch (e) {
+      if (e.code === 'auth/wrong-password') {
+        setError('Incorrect password. Please try again.');
+      } else if (e.code === 'auth/too-many-requests') {
+        setError('Too many sign in requests. Please try again later.')
+      } else {
+        setError(e.message);
+      }
+      return;
+    }
+
+    try {
+      // update profile
+      await firebase.auth().currentUser.updateEmail(newEmail);
+      // go to home page
+      window.location.href = '/';
+    } catch (e) {
+      if (e.code === 'auth/invalid-email') {
+        setError('Invalid email address.');
+      } else {
+        setError(e.message);
+      }
+    }
+  }
+
   function startDelete() {
     setSuccess('');
+    setNewEmail('');
+    setPassword('');
     setError(panelState !== 'delete' ? "Re-enter password to permanently delete account and all posts." : '');
     setPanelState(panelState === 'delete' ? '' : 'delete');
   }
@@ -117,6 +162,8 @@ function SettingsExtras() {
       <div>
         {/* reset password */}
         <button onClick={resetPassword}>Reset password</button>
+        {/* reset password */}
+        <button onClick={startChangeEmail} className="change-email">Change email</button>
         {/* delete account */}
         <button onClick={startDelete}>Delete account</button>
       </div>
@@ -127,6 +174,39 @@ function SettingsExtras() {
       {
         panelState &&
         <div>
+          {
+            panelState === 'email' &&
+            <div className="flex-col">
+              <form onSubmit={changeEmail} className="flex-col">
+                {/* email */}
+                <div className="margin-sm">
+                  <label htmlFor="emailInput">New Email</label>
+                  <input
+                  value={newEmail}
+                  type="email"
+                  id="emailInput"
+                  placeholder="email@example.com"
+                  onChange={e => setNewEmail(e.target.value)}
+                  required
+                  />
+                </div>
+                {/* password */}
+                <div className="margin-sm">
+                  <label htmlFor="emlPwdInput">Password</label>
+                  <input
+                  value={password}
+                  type="password"
+                  id="emlPwdInput"
+                  placeholder="password"
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  />
+                </div>
+                <button type="submit">Change email</button>
+              </form>
+              <button onClick={resetInfo} className="cancel-button">Cancel, do not change email</button>
+            </div>
+          }
           {
             panelState === 'delete' &&
             <div className="flex-col">
