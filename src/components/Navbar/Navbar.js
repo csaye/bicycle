@@ -6,7 +6,7 @@ import logo from '../../img/logo.png';
 
 // Navbar component
 function Navbar() {
-  let [username, setUsername] = useState('');
+  const [username, setUsername] = useState('');
 
   function signOut() {
     firebase.auth().signOut();

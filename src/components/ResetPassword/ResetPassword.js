@@ -4,10 +4,10 @@ import firebase from 'firebase/app';
 
 // ResetPassword component
 function ResetPassword() {
-  let [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
 
-  let [success, setSuccess] = useState('');
-  let [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
 
   // select email field on start
   useEffect(() => {

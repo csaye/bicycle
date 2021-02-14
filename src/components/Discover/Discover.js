@@ -101,7 +101,7 @@ function Discover() {
         {
           sortedUsers.length > 0 ?
           sortedUsers.map(u => <User key={u.id} data={u} />) :
-          <div>
+          <div className="margin-sm">
             No recommendations yet.
             <br />
             Friend <Link to="/bicycle">@bicycle</Link> for a starting point.

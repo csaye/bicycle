@@ -13,13 +13,13 @@ function Profile() {
   // get username from url
   const { urlUsername } = useParams();
 
-  let [displayName, setDisplayName] = useState(undefined);
-  let [profileURL, setProfileURL] = useState(undefined);
-  let [status, setStatus] = useState('');
-  let [uid, setUid] = useState(undefined);
-  let [username, setUsername] = useState(undefined);
+  const [displayName, setDisplayName] = useState(undefined);
+  const [profileURL, setProfileURL] = useState(undefined);
+  const [status, setStatus] = useState('');
+  const [uid, setUid] = useState(undefined);
+  const [username, setUsername] = useState(undefined);
 
-  let [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // get user data from username
   async function getUserData() {
@@ -59,7 +59,7 @@ function Profile() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let [statusUpdated, setStatusUpdated] = useState(false);
+  const [statusUpdated, setStatusUpdated] = useState(false);
 
   async function updateStatus() {
     setStatusUpdated(false);

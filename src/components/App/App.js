@@ -26,6 +26,24 @@ firebase.initializeApp(firebaseConfig);
 function App() {
   useAuthState(firebase.auth());
 
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    // initialize on auth state change
+    firebase.auth().onAuthStateChanged(() => {
+      setInitialized(true);
+    });
+  });
+
+  // if not initialized, return empty page
+  if (!initialized) {
+    return (
+      <div className="App">
+        <p className="margin-sm">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <Router>
@@ -43,7 +61,7 @@ function App() {
 // Page component
 function Page() {
   // get username
-  let [username, setUsername] = useState(undefined);
+  const [username, setUsername] = useState(undefined);
   async function getUsername() {
     // if not signed in, return
     if (!firebase.auth().currentUser) return;

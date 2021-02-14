@@ -6,12 +6,12 @@ import { usernameTaken } from '../../util/usernameData.js';
 
 // SignUp component
 function SignUp() {
-  let [email, setEmail] = useState('');
-  let [password, setPassword] = useState('');
-  let [displayName, setDisplayName] = useState('');
-  let [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
 
-  let [error, setError] = useState('');
+  const [error, setError] = useState('');
 
   // select email field on start
   useEffect(() => {

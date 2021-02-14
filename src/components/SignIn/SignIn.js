@@ -4,10 +4,10 @@ import firebase from 'firebase/app';
 
 // SignIn component
 function SignIn() {
-  let [email, setEmail] = useState('');
-  let [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  let [error, setError] = useState(undefined);
+  const [error, setError] = useState(undefined);
 
   // select email field on start
   useEffect(() => {
