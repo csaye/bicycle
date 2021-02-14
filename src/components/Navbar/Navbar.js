@@ -56,12 +56,6 @@ function Navbar() {
             {
               firebase.auth().currentUser &&
               <li className="nav-item">
-                <Link to="/discover" className="link">Discover</Link>
-              </li>
-            }
-            {
-              firebase.auth().currentUser &&
-              <li className="nav-item">
                 <Link to="/settings" className="link">Settings</Link>
               </li>
             }

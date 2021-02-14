@@ -11,7 +11,6 @@ import Settings from '../Settings/Settings.js';
 import About from '../About/About.js';
 import Friends from '../Friends/Friends.js';
 import Messages from '../Messages/Messages.js';
-import Discover from '../Discover/Discover.js';
 import ResetPassword from '../ResetPassword/ResetPassword.js';
 
 import firebase from 'firebase/app';
@@ -109,14 +108,6 @@ function Page() {
           {
             firebase.auth().currentUser ?
             <Settings /> :
-            <Redirect to="/signin" />
-          }
-        </Route>
-        {/* discover page */}
-        <Route path="/discover">
-          {
-            firebase.auth().currentUser ?
-            <Discover /> :
             <Redirect to="/signin" />
           }
         </Route>
