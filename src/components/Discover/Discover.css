@@ -17,4 +17,11 @@
 
 .Discover .user-list .User {
   width: 100%;
+  margin: 5px 10px;
+}
+
+@media (max-width: 991px) {
+  .Discover {
+    display: none;
+  }
 }
