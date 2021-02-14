@@ -1,12 +1,20 @@
 .Discover {
-  margin: 10px;
+  background-color: #bbb;
+  position: fixed;
+  height: 100%;
+  width: 220px;
+  right: 0;
 }
 
 .Discover .may-know {
-  margin: 20px 0 0 10px;
+  margin: 10px 0 0 10px;
 }
 
 .Discover .user-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+.Discover .user-list .User {
+  width: 100%;
 }

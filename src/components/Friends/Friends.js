@@ -1,4 +1,3 @@
-import './Friends.css';
 import firebase from 'firebase/app';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import User from '../User/User.js';
 import FriendsPosts from '../FriendsPosts/FriendsPosts.js';
+import Discover from '../Discover/Discover.js';
 
 // FriendsList component
 function FriendsList(props) {
@@ -52,6 +53,7 @@ function FriendsList(props) {
           </div>
         }
       </div>
+      <Discover />
       <FriendsPosts friendUids={friendUids} />
     </div>
   )
