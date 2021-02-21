@@ -10,7 +10,6 @@ function Navbar() {
 
   function signOut() {
     firebase.auth().signOut();
-    window.location.href = '/signin';
   }
 
   function searchUser(e) {

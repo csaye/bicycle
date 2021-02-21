@@ -1,6 +1,9 @@
 .Navbar {
   background-color: #efefef;
   min-height: 75px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .navbar-brand img {
