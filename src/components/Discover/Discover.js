@@ -1,7 +1,6 @@
 import './Discover.css';
 import firebase from 'firebase/app';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import User from '../User/User.js';
@@ -103,8 +102,6 @@ function Discover() {
           sortedUsers.map(u => <User key={u.id} data={u} />) :
           <div className="margin-sm">
             No recommendations yet.
-            <br />
-            Friend <Link to="/bicycle">@bicycle</Link> for a starting point.
           </div>
         }
       </div>

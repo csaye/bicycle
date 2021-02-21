@@ -11,6 +11,10 @@
   color: #999;
 }
 
+.Message .new-text {
+  color: #2196f3;
+}
+
 .sent-message {
   background-color: #209cee;
 }

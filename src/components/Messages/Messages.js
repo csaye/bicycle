@@ -72,7 +72,8 @@ function Messages() {
       senderUid: uid,
       receiverUid: friendUid,
       content: content,
-      createdAt: new Date()
+      createdAt: new Date(),
+      read: false
     });
   }
 
