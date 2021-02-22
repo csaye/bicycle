@@ -1,46 +1,83 @@
 .Messages {
-  display: flex;
+  height: 100%;
+  overflow: auto;
+}
+
+@media (max-width: 767px) {
+  .Messages {
+    /* display: block; */
+  }
 }
 
 /* friends list */
 
 .Messages .friends-list {
   background-color: #bbb;
-  position: fixed;
+  float: left;
   height: 100%;
-  width: 200px;
+  min-width: 240px;
   display: flex;
   flex-direction: column;
   padding: 10px;
+  overflow-y: scroll;
 }
 
 .Messages .friends-list p {
   margin: 0;
 }
 .Messages .friends-list button {
-  margin: 2px 0;
+  margin: 2px 5px;
+}
+
+@media (max-width: 767px) {
+  .Messages .friends-list {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+  .Messages .friends-list button {
+    margin: 2px auto;
+    width: 200px;
+  }
 }
 
 /* message list */
 
-.Messages .pick-text {
-  margin: 10px 10px 10px 210px;
-}
-
 .Messages .message-list {
-  margin: 20px 20px 20px 220px;
-  width: 250px;
+  float: left;
+  width: calc(100% - 240px);
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 10px;
 }
 
 .Messages .message-list .messaging-with {
-  margin-bottom: 10px;
+  margin: 20px 0 10px 0;
+}
+
+.Messages .message-list form {
+  width: 100%;
+  padding: 0 20px;
 }
 
 .Messages .message-list textarea {
-  width: 100%;
+  width: 240px;
 }
 
 .Messages .message-list .send-button {
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.Messages .message-list .no-messages-yet {
+  margin: 0 0 0 20px;
+}
+
+@media (max-width: 767px) {
+  .Messages .message-list {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
+  }
 }

@@ -113,7 +113,7 @@ function Messages() {
       {
         // if messages and not loading messages
         (messages && !loadingMessages) ?
-        <div>
+        <>
           {
             // if friend uid valid
             friendUid ?
@@ -137,15 +137,19 @@ function Messages() {
               {
                 messages.length > 0 ?
                 messages.map(m => <Message key={m.id} data={m} />) :
-                <p>No messages yet</p>
+                <p className="no-messages-yet">No messages yet</p>
               }
             </div> :
             // if friend uid not valid
-            <p className="pick-text">Pick a mutual friend to message with.</p>
+            <div className="message-list">
+              <p className="margin-sm">Pick a mutual friend to message with.</p>
+            </div>
           }
-        </div> :
+        </> :
         // if not messages or loading messages
-        <p className="pick-text">Retrieving messages...</p>
+        <div className="message-list">
+          <p className="margin-sm">Retrieving messages...</p>
+        </div>
       }
     </div>
   );
