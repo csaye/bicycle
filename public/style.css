@@ -8,6 +8,10 @@ html, body {
   background-image: linear-gradient(to right, #ffffff, #f8f8f8)!important;
 }
 
+html, body, #root, .App {
+  height: 100%;
+}
+
 button {
   cursor: pointer;
 }

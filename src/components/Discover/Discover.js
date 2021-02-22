@@ -88,7 +88,7 @@ function Discover() {
   if (!sortedUsers) {
     return (
       <div className="Discover">
-        <p>Retrieving users...</p>
+        <p className="margin-sm">Retrieving users...</p>
       </div>
     )
   }

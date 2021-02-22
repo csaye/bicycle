@@ -1,6 +1,7 @@
 .FriendsPosts {
-  overflow: auto;
-  margin: 0 220px;
+  float: left;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 @media (max-width: 575px) {

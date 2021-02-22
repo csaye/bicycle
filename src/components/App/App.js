@@ -1,3 +1,5 @@
+import './App.css';
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -46,8 +48,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
-        <Page />
+        <div className="nav-page-flex">
+          <Navbar />
+          <Page />
+        </div>
       </Router>
     </div>
   );
