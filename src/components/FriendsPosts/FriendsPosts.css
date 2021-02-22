@@ -2,16 +2,17 @@
   float: left;
   height: 100%;
   overflow-y: scroll;
+  width: calc(100% - 440px);
 }
 
 @media (max-width: 575px) {
   .FriendsPosts {
-    margin-left: 0;
+    min-width: 100%;
   }
 }
 
 @media (max-width: 991px) {
   .FriendsPosts {
-    margin-right: 0;
+    width: calc(100% - 220px);
   }
 }

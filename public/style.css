@@ -16,6 +16,10 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #dedede;
+}
+
 textarea {
   resize: none!important;
 }

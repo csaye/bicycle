@@ -1,9 +1,9 @@
 .Discover {
   background-color: #bbb;
-  position: fixed;
+  float: right;
   height: 100%;
   width: 220px;
-  right: 0;
+  overflow-y: scroll;
 }
 
 .Discover .may-know {

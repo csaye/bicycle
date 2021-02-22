@@ -4,11 +4,8 @@
   flex-direction: column;
 }
 
-.Page, .Friends, .FriendsList {
-  height: inherit;
-}
-
 .Page {
+  height: 100%;
   flex: 1;
   overflow: auto;
 }
