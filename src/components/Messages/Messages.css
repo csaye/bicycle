@@ -3,12 +3,6 @@
   overflow: auto;
 }
 
-@media (max-width: 767px) {
-  .Messages {
-    /* display: block; */
-  }
-}
-
 /* friends list */
 
 .Messages .friends-list {
@@ -75,9 +69,7 @@
 
 @media (max-width: 767px) {
   .Messages .message-list {
-    position: static;
-    width: 100%;
     height: auto;
-    overflow-y: visible;
+    width: 100%;
   }
 }

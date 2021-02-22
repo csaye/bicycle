@@ -1,9 +1,13 @@
 .PostList {
-  margin-left: 400px;
+  float: left;
+  height: 100%;
+  overflow-y: scroll;
+  width: calc(100% - 400px);
 }
 
 @media (max-width: 767px) {
   .PostList {
-    margin-left: 0;
+    height: auto;
+    width: 100%;
   }
 }

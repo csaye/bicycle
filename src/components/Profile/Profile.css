@@ -1,19 +1,21 @@
 .Profile {
-  overflow: auto;
+  height: 100%;
 }
 
 .Profile .sidebar {
   background-color: #bbb;
+  float: left;
+  height: 100%;
   width: 400px;
   padding: 20px;
-  height: 100%;
-  position: fixed;
+  overflow-y: scroll;
 }
 
 @media (max-width: 767px) {
   .Profile .sidebar {
     position: static;
     width: 100%;
+    height: auto;
   }
 }
 
