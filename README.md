@@ -2,7 +2,7 @@
 
 A minimalist social media placing its users first. Post thoughts, connect with friends, and keep it simple on Bicycle.
 
-Try it here: [bicycle.social](https://bicycle.social)
+Try it here: [bicycle-social.vercel.app](https://bicycle-social.vercel.app)
 
 ## About
 
